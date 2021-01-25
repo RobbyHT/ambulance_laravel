@@ -18,5 +18,6 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 });*/
 
+Route::get('login','api\userController@login');
 Route::apiResource('user','api\userController');
 Route::apiResource('company','api\CompanyController');

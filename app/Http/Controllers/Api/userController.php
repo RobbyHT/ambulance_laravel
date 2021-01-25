@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class userController extends Controller
 {
@@ -15,7 +16,6 @@ class userController extends Controller
      */
     public function index()
     {
-        //
         $data = User::all();
         return response()->json($data);
     }
@@ -38,7 +38,9 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $resoult = User::updateOrCreate(['id' => $request->id], $data);
+        return response($resoult, Response::HTTP_OK);
     }
 
     /**
@@ -84,5 +86,16 @@ class userController extends Controller
     public function destroy(User $User)
     {
         //
+    }
+
+    public function login(Request $request)
+    {
+        $data = User::where('account', $request->account)->where('perid', $request->password)->first();
+        if($data!=null){
+            $resoult="true";
+        }else{
+            $resoult="false";
+        }
+        return response($resoult, Response::HTTP_OK);
     }
 }
