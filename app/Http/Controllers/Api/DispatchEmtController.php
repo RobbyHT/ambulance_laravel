@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\dispatchEmt;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Log;
 
-class userController extends Controller
+class DispatchEmtController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +17,7 @@ class userController extends Controller
      */
     public function index()
     {
-        $data = User::all();
-        return response()->json($data);
+        //
     }
 
     /**
@@ -38,18 +38,28 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $resoult = User::updateOrCreate(['id' => $request->id], $data);
+        $data = [];
+        foreach($request->user_id as $id){
+            $data['dispatch_id'] = $request->dispatch_id;
+            $data['user_id'] = $id;
+            $data['state'] = $request->state;
+
+            $resoult = dispatchEmt::create($data);
+        }
+
+        //echo $qq->dispatch_id;
+
+        //$resoult = dispatchEmt::create($data);
         return response($resoult, Response::HTTP_OK);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $User
+     * @param  \App\Models\dispatchEmt  $dispatchEmt
      * @return \Illuminate\Http\Response
      */
-    public function show(User $User)
+    public function show(dispatchEmt $dispatchEmt)
     {
         //
     }
@@ -57,10 +67,10 @@ class userController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $User
+     * @param  \App\Models\dispatchEmt  $dispatchEmt
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $User)
+    public function edit(dispatchEmt $dispatchEmt)
     {
         //
     }
@@ -69,10 +79,10 @@ class userController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $User
+     * @param  \App\Models\dispatchEmt  $dispatchEmt
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $User)
+    public function update(Request $request, dispatchEmt $dispatchEmt)
     {
         //
     }
@@ -80,32 +90,11 @@ class userController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $User
+     * @param  \App\Models\dispatchEmt  $dispatchEmt
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $User)
+    public function destroy(dispatchEmt $dispatchEmt)
     {
         //
-    }
-
-    public function login(Request $request)
-    {
-        $data = User::where('account', $request->account)->where('perid', $request->password)->first();
-        if($data!=null){
-            $resoult="true";
-        }else{
-            $resoult="false";
-        }
-        return response($resoult, Response::HTTP_OK);
-    }
-
-    public function userTake($vm)
-    {
-        if($vm === "driver"){
-            $data = User::where('permission', 'driver')->get();
-        }else if($vm === "EMT"){
-            $data = User::where('permission', 'EMT')->get();   
-        }
-        return response()->json($data);
     }
 }

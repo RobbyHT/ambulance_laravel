@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\DispatchRecord;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
-class userController extends Controller
+class DispatchRecordController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +18,7 @@ class userController extends Controller
      */
     public function index()
     {
-        $data = User::all();
+        $data = DispatchRecord::all();
         return response()->json($data);
     }
 
@@ -39,28 +41,32 @@ class userController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $resoult = User::updateOrCreate(['id' => $request->id], $data);
+        // $result = json_decode($data[0], true);
+        // Log::info($data);
+        // die();
+        $resoult = DispatchRecord::create($data);
         return response($resoult, Response::HTTP_OK);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $User
+     * @param  \App\Models\DispatchRecord  $dispatchRecord
      * @return \Illuminate\Http\Response
      */
-    public function show(User $User)
+    public function show(DispatchRecord $dispatchRecord, int $id)
     {
-        //
+        $data = DispatchRecord::find($id);
+        return response()->json($data);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $User
+     * @param  \App\Models\DispatchRecord  $dispatchRecord
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $User)
+    public function edit(DispatchRecord $dispatchRecord)
     {
         //
     }
@@ -69,43 +75,32 @@ class userController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $User
+     * @param  \App\Models\DispatchRecord  $dispatchRecord
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $User)
+    public function update(Request $request, DispatchRecord $dispatchRecord, int $id)
     {
-        //
+        
+        DispatchRecord::where('id', $id)->update(['state' => $request->state]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $User
+     * @param  \App\Models\DispatchRecord  $dispatchRecord
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $User)
+    public function destroy(DispatchRecord $dispatchRecord)
     {
         //
     }
 
-    public function login(Request $request)
+    public function checkTask(DispatchRecord $dispatchRecord)
     {
-        $data = User::where('account', $request->account)->where('perid', $request->password)->first();
-        if($data!=null){
-            $resoult="true";
-        }else{
-            $resoult="false";
-        }
-        return response($resoult, Response::HTTP_OK);
-    }
-
-    public function userTake($vm)
-    {
-        if($vm === "driver"){
-            $data = User::where('permission', 'driver')->get();
-        }else if($vm === "EMT"){
-            $data = User::where('permission', 'EMT')->get();   
-        }
+        $data = DB::select("select * from dispatch_records
+                                where d_date::date = CURRENT_DATE 
+                                        and d_time::time < CURRENT_TIME
+                                        and state = 1");
         return response()->json($data);
     }
 }

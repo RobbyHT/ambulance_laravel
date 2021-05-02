@@ -21,3 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('login','api\userController@login');
 Route::apiResource('user','api\userController');
 Route::apiResource('company','api\CompanyController');
+Route::apiResource('dispatch','api\DispatchRecordController');
+Route::apiResource('dispatchEMT','api\DispatchEmtController');
+
+Route::get('checkTask','api\DispatchRecordController@checkTask');
+Route::get('userTake/{vm}','api\userController@userTake');
