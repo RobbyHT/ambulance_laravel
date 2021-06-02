@@ -42,7 +42,7 @@ class DispatchRecordController extends Controller
     {
         $data = $request->all();
         // $result = json_decode($data[0], true);
-        // Log::info($data);
+        Log::info($data);
         // die();
         $resoult = DispatchRecord::create($data);
         return response($resoult, Response::HTTP_OK);

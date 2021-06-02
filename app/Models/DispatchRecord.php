@@ -18,7 +18,11 @@ class DispatchRecord extends Model
      */
     protected $fillable = [
         'start',
+        'start_lat',
+        'start_lng',
         'end',
+        'end_lat',
+        'end_lng',
         'd_date',
         'd_time',
         'o2',
@@ -27,7 +31,8 @@ class DispatchRecord extends Model
         'weight',
         'phone',
         'remark',
-        'user_id',
+        'driver_id',
         'state',
+        'user_id',
     ];
 }

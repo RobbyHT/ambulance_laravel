@@ -91,12 +91,13 @@ class userController extends Controller
     public function login(Request $request)
     {
         $data = User::where('account', $request->account)->where('perid', $request->password)->first();
-        if($data!=null){
-            $resoult="true";
-        }else{
-            $resoult="false";
-        }
-        return response($resoult, Response::HTTP_OK);
+
+        /*if($data != null){
+            $resoult = $data->permission;
+        }*/
+        return response()->json($data);
+
+        //return response($data, Response::HTTP_OK);
     }
 
     public function userTake($vm)
