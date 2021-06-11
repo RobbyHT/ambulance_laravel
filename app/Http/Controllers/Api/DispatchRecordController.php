@@ -103,4 +103,18 @@ class DispatchRecordController extends Controller
                                         and state = 1");
         return response()->json($data);
     }
+
+    public function driverTask($userid)
+    {
+        $data = DB::select("select * from dispatch_records
+                                where driver_id = ?", [$userid]);
+        return response()->json($data);
+    }
+
+    public function emtTask($userid)
+    {
+        $data = DB::select("select a.* from dispatch_records as a, dispatch_emts as b
+                                where a.id = b.dispatch_id and b.user_id = ?", [$userid]);
+        return response()->json($data);
+    }
 }

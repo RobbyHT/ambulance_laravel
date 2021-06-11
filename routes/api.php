@@ -26,3 +26,6 @@ Route::apiResource('dispatchEMT','api\DispatchEmtController');
 
 Route::get('checkTask','api\DispatchRecordController@checkTask');
 Route::get('userTake/{vm}','api\userController@userTake');
+Route::get('driverTask/{userid}','api\DispatchRecordController@driverTask');
+Route::get('emtTask/{userid}','api\DispatchRecordController@emtTask');
+
