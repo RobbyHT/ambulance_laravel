@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\industry;
 
 class AuthenticationController extends Controller
 {
@@ -17,16 +16,10 @@ class AuthenticationController extends Controller
   public function registerPage(Request $request){
     //return var_dump(session()->all());
     if (Auth::check()) {
-       Auth::logout();
+      Auth::logout();
     }
-    $pageConfigs = ['bodyCustomClass'=> 'bg-full-screen-image'];
 
-    //$industries = industry::all();
-
-    return view('pages.auth-register',[
-      'pageConfigs' => $pageConfigs,
-      //'industries' => $industries,
-      ]);
+    return view('pages.auth-register');
   }
    //forget Password page
    public function forgetPasswordPage(){

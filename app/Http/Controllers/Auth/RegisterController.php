@@ -3,11 +3,22 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\company;
+use App\Rules\RulePerid;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegMail;
+use Exception;
 
 class RegisterController extends Controller
 {
@@ -29,7 +40,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -50,9 +61,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'account' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'perid' => ['required', 'string', new RulePerid],
         ]);
     }
 
@@ -64,10 +75,125 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $license_VP = $data['license_VP'] ?? '';
+
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'account' => $data['account'],
             'password' => Hash::make($data['password']),
+            'name' => $data['name'],
+            'perid' => $data['perid'],
+            'email' => $data['email'],
+            'telphone' => $data['telphone'],
+            'birther' => $data['birther'],
+            'gender' => $data['gender'],
+            'license_VP' => $license_VP,
+            'license_path' => $data['license_path'],
+            'permission' => $data['permission'],
+            'c_id' => $data['c_id'],
         ]);
+    }
+
+    public function register(Request $request)
+    {
+        $data = $request->all();
+
+        $validator = $this->validator($data);
+        
+        if ($validator->fails()) {
+            return redirect('auth-register')
+                        ->withErrors($validator,'regdata')
+                        ->withInput($request->all());
+        }
+        
+        $validator->validate();
+
+        DB::beginTransaction();
+        try {
+            $data['license_path'] = null;
+            if($request->license_img != null && $request->license_img != "undefined"){
+                $data['license_path'] = Storage::disk('public')->put('license', $request->image);
+            }
+
+            if($request->permission == 'unit'){
+                $data['c_id'] = company::create([
+                    'c_name' => $data['c_name'],
+                    'c_tel' => $data['c_tel'],
+                    'c_addr' => $data['c_addr'],
+                    'tax_id' => $data['tax_id'],
+                ])->id;
+            }else{
+                $c_key = company::whereNotNull('c_key')->where('c_key', $request->company_key)->first();
+                if($c_key == ''){
+                    return redirect('auth-register')
+                                ->withErrors(["key"=>"key not found."], 'regdata')
+                                ->withInput($request->all());
+                }
+            }
+
+            $data['perid'] = Crypt::encryptString($data['perid']);
+            $data['password'] =  $this->generateRandomString(8);
+
+            event(new Registered($user = $this->create($data)));
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        $s = $this->send($data);
+        
+        return $request->wantsJson()
+                        ? new Response('', 201)
+                        : redirect($this->redirectPath())->with('msg','已寄出帳密到email：'.$data['email'].'，請使用該帳密登入!!');  
+    }
+
+    protected function generateRandomString(int $length) 
+    {
+        //$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ=/\@#$%&';
+        $characters = '123QWEASD';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    protected function send(array $data)
+    {
+        try {
+            // 收件者務必使用 collect 指定二維陣列，每個項目務必包含 "name", "email"
+            $to = collect([
+                ['name' => $data['name'], 'email' => $data['email']]
+            ]);
+    
+            // 提供給模板的參數
+            $data['subject'] = '醫指派註冊訊息';
+            $data['msg'] = '您好，登入用的帳號/密碼如下，請至首頁登入後修改密碼!!';
+            $data['url'] = 'http://127.0.0.1:3000';
+
+            // 若要直接檢視模板
+            // echo (new Warning($data))->render();die;
+ 
+            Mail::to($to)->send(new RegMail($data));
+
+            Log::info($data);
+            return "ok"; //event(new LogSeningMessage());
+
+        } catch (\Exception $e) {
+
+            Log::info($e);
+
+            if (count(Mail::failures()) > 0) {
+                //return Mail::failures();
+                return $e;
+            }
+            return "failures";
+
+        }        
     }
 }

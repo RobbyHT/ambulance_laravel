@@ -22,5 +22,6 @@ class company extends Model
         'tax_id',
         'principal',
         'principal_tel',
+        'c_key',
     ];
 }

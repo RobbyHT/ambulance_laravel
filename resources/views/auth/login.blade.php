@@ -1,4 +1,4 @@
-@extends('layouts.loginLayout')
+@extends('layouts.fullLayoutMaster')
 
 @section('content')
 <div class="container">
@@ -24,7 +24,8 @@
               </div>
               <div class="card-content">
                 <div class="card-body">
-                  <form id="myForm" method="POST" action="{{--route('login')--}}" onsubmit="return qq(this);">
+                  <form id="myForm" method="POST" action="{{ route('login') }}">
+                    {{ csrf_field() }}
                     <div class="form-group mb-50">
                       <label class="text-bold-600" for="account" style="font-size: 24px;">帳號</label>
                       <div class="input_container">

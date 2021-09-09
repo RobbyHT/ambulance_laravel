@@ -26,5 +26,9 @@ class User extends Authenticatable
         'c_id',
         'permission',
         'login_attempt',
+        'email',
+        'password',
+        'telphone',
+        'license_path',
     ];
 }
