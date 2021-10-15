@@ -21,15 +21,13 @@
     @yield('styles')
   </head>
   <body class="bg-full-screen-image">
-    <div id='app' class="app-content content">
-      <div class="content-overlay"></div>
-      <div class="content-wrapper">
-        <div class="content-header-left col-12 pt-1 bg-header">
-          <img class="header-img" src="{{ asset('img/logo.png') }}" alt="logo">
-        </div>
-        <div class="content-body">
-          @yield('content')
-        </div>
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+      <div class="content-header-left col-12 pt-1 bg-header">
+        <img class="header-img" src="{{ asset('img/logo.png') }}" alt="logo">
+      </div>
+      <div class="content-body">
+        @yield('content')
       </div>
     </div>
 

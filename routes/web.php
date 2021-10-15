@@ -31,7 +31,7 @@ Route::get('/auth-lock-screen','AuthenticationController@authLockPage');
 
 Route::post('/forgotpass', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/{any?}', function() {
     return view('app');

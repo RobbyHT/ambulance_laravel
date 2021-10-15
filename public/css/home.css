@@ -1,0 +1,30 @@
+.item-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.about {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2vmin;
+  margin: 3vmin 1.5vmin 3vmin 4vmin;
+  padding-top: 2vmin;
+  height: 80vmin;
+}
+.about .title {
+  color: #0C2A85;
+  font-size: 2.3rem;
+  font-weight: bolder;
+  padding-bottom: 3px; 
+  border-bottom: 5px solid #6B92CF;
+}
+.about .content {
+  color: #000000;
+  font-size: 1.3rem;
+  font-weight: bolder;
+  padding: 3vmin 5vmin;
+  text-align: left;
+  max-height: 25vmin;
+}
+.ellipsis {
+  overflow:hidden;
+  line-height: 3vmin;
+}
