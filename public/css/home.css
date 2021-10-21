@@ -24,7 +24,7 @@
   text-align: left;
   max-height: 25vmin;
 }
-.news {
+/*.news {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 2vmin;
   margin: 3vmin 0;
@@ -45,7 +45,7 @@
   padding: 0;
   text-align: left;
   max-height: 25vmin;
-}
+}*/
 .text-element {
   white-space: nowrap;
   overflow: hidden;
@@ -72,7 +72,7 @@
 .fc .fc-daygrid-body {
   width: 100% !important;
 }
-fc .fc-scrollgrid-section table {
+.fc .fc-scrollgrid-section table {
   width: 100% !important;
 }
 .fc .fc-scrollgrid-section-body table, .fc .fc-scrollgrid-section-footer table {
@@ -97,4 +97,74 @@ fc .fc-scrollgrid-section table {
   padding: 0.4rem 0.8rem;
   border-top: 0;
   border-bottom: 1px solid #dee2e6;
+}
+.news {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2vmin;
+  margin: 3vmin 0;
+  padding-top: 2vmin;
+  height: 80vmin;
+  transition: all .5s;
+}
+.news .title {
+  color: #0C2A85;
+  font-size: 1.3rem;
+  font-weight: bolder;
+  padding-bottom: 3px; 
+  border-bottom: 5px solid #6B92CF;
+  text-align: left;
+}
+.news .content {
+  color: #000000;
+  font-size: 1.3rem;
+  font-weight: bolder;
+  padding: 0;
+  text-align: left;
+  max-height: 25vmin;
+}
+.news .bottom {
+  font-size: 1.1rem;
+  text-align: end;
+}
+/*.left_wrap {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2vmin;
+  border: 1px solid #dfe2e5;
+  padding: 0;
+  
+}*/
+.left_wrap .toptitle {
+  color: #0C2A85;
+  font-size: 2rem;
+  font-weight: bolder;
+  border-bottom: 1px solid #e1e7f0;
+  padding: 0 0.5em;
+}
+.align-items-center {
+  align-items: center!important;
+}
+.d-flex {
+  display: flex!important;
+}
+.left_wrap ul.news {
+  max-height: 80vh;
+  min-height: 80vh;
+  overflow-y: auto;
+}
+.left_wrap ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.left_wrap ul li a {
+  padding: .56em 1em;
+  text-decoration: none;
+  min-height: calc(10vh - 16px);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.left_wrap ul li:nth-child(2n) {
+  background: #eff3f6;
 }
