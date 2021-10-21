@@ -9,7 +9,7 @@
               <ul class="nav navbar-nav">
                 <li class="nav-item">
                   <a class="nav-link" style="width: 10em;" href="/">
-                    <img src="/img/logo.png" width="100%" alt=" logo">
+                    <img src="/img/new_logo.png" width="100%" alt=" logo">
                   </a>
                 </li>
               </ul>          
@@ -23,12 +23,10 @@
                 <span class="mr-1">XXX</span>
                 <transition name="logoutMenuTra">
                   <ul class="logoutMenu" v-show="isShow">
-                    <li>
-                      <form method="POST" action="">                
-                        <button type="submit" style="font-weight: bold; color:red; border: 0; background-color:#ffffff;">
-                          登出
-                        </button>
-                      </form>
+                    <li>              
+                      <button @click="logout" style="font-weight: bold; color:red; border: 0; background-color:#ffffff;">
+                        登出
+                      </button>
                     </li>
                   </ul>
                 </transition>
@@ -47,6 +45,17 @@ export default {
   data() {
     return {
       isShow: false
+    }
+  },
+  methods: {
+    logout() {
+      axios.post("logout").then(response => { 
+        location.reload();
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
     }
   }
 }

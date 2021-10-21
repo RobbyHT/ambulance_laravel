@@ -411,9 +411,12 @@
   opacity: 0;
 }
 .navbar {
-  background: rgb(255, 255, 255, 0.3);
+  position: fixed;
+  z-index: 10;
+  background: #FFFFFF;
   padding: 0 2vmin;
   height: 80px;
+  top: 0;
 }
 .nav-item {
   text-align: left;
@@ -422,4 +425,15 @@
 }
 .navbar-collapse {
   display: flex;
+}
+.header-navbar .navbar-wrapper {
+  position: fixed;
+  z-index: 10;
+  background: #FFFFFF;
+  padding-top: 0;
+  top: 0;
+  height: 80px;
+}
+.main {
+  margin-top: 80px;
 }

@@ -117,4 +117,10 @@ class DispatchRecordController extends Controller
                                 where a.id = b.dispatch_id and b.user_id = ?", [$userid]);
         return response()->json($data);
     }
+
+    public function getEvents()
+    {
+        $data = DB::select("select (dispatch_records.start || '到' || dispatch_records.end) as title, d_date as start from dispatch_records");
+        return response()->json($data);
+    }
 }

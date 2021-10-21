@@ -2,21 +2,21 @@
   display: flex;
   flex-wrap: wrap;
 }
-.about {
+.calender {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 2vmin;
-  margin: 3vmin 1.5vmin 3vmin 4vmin;
+  margin: 3vmin 0;
   padding-top: 2vmin;
   height: 80vmin;
 }
-.about .title {
+.calender .title {
   color: #0C2A85;
-  font-size: 2.3rem;
+  font-size: 2rem;
   font-weight: bolder;
   padding-bottom: 3px; 
   border-bottom: 5px solid #6B92CF;
 }
-.about .content {
+.calender .content {
   color: #000000;
   font-size: 1.3rem;
   font-weight: bolder;
@@ -24,7 +24,77 @@
   text-align: left;
   max-height: 25vmin;
 }
+.news {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2vmin;
+  margin: 3vmin 0;
+  padding-top: 2vmin;
+  height: 80vmin;
+}
+.news .title {
+  color: #0C2A85;
+  font-size: 2rem;
+  font-weight: bolder;
+  padding-bottom: 3px; 
+  border-bottom: 5px solid #6B92CF;
+}
+.news .content {
+  color: #000000;
+  font-size: 1.3rem;
+  font-weight: bolder;
+  padding: 0;
+  text-align: left;
+  max-height: 25vmin;
+}
+.text-element {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .ellipsis {
   overflow:hidden;
   line-height: 3vmin;
+}
+.fc-media-screen {
+  height: 60vmin;
+}
+.fc .fc-toolbar-title {
+  font-size: 1.3rem;
+  margin: 0;
+}
+.fc table {
+  font-size: 1.1rem;
+}
+.fc .fc-button {
+  font-size: 1.1rem;
+  padding: 0.2em 0.5em;
+}
+.fc .fc-daygrid-body {
+  width: 100% !important;
+}
+fc .fc-scrollgrid-section table {
+  width: 100% !important;
+}
+.fc .fc-scrollgrid-section-body table, .fc .fc-scrollgrid-section-footer table {
+  width: 100% !important;
+}
+.fc .fc-scrollgrid, .fc .fc-scrollgrid table {
+  width: 100% !important;
+}
+.navbar-collapse {
+  padding-right: 3vmin;
+}
+.table {
+  font-size: 1.1rem;
+  table-layout: fixed;
+  margin-top: 2vmin;
+}
+.table tr {
+  display: flex;
+  margin-bottom: 1vmin;
+}
+.table th, .table td {
+  padding: 0.4rem 0.8rem;
+  border-top: 0;
+  border-bottom: 1px solid #dee2e6;
 }

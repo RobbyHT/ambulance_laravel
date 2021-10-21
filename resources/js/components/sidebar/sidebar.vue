@@ -1,8 +1,8 @@
 <style>
   :root {
-    --sidebar-bg-color: #15006c;
-    --sidebar-item-hover: #3f5e8d;
-    --sidebar-item-active: #234271;
+    --sidebar-bg-color: #394867;
+    --sidebar-item-hover: rgb(0, 0, 0, 0.3);
+    --sidebar-item-active: rgb(155, 164, 180, 0.8);
     /*
     #15006c
       #000747
@@ -60,9 +60,6 @@
     <SidebarLink to="/equipment" icon="fas fa-first-aid">設備管理</SidebarLink>
     <SidebarLink to="/evaluation" icon="fas fa-file-medical">評鑑管理</SidebarLink>
     <SidebarLink to="/statistics" icon="fas fa-chart-line">統計分析</SidebarLink>
-    <!--<SidebarLink to="/analytics" icon="fas fa-chart-bar">Analytics</SidebarLink>
-    <SidebarLink to="/friends" icon="fas fa-users">Friends</SidebarLink>
-    <SidebarLink to="/image" icon="fas fa-image">Images</SidebarLink>-->
 
     <span
       class="collapse-icon"
