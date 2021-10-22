@@ -2,84 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\news;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Create a new controller instance.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function newsAdd()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\news  $news
-     * @return \Illuminate\Http\Response
-     */
-    public function show(news $news)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\news  $news
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(news $news)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\news  $news
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, news $news)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\news  $news
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(news $news)
-    {
-        //
+        return view('xxx.news.news_add',[
+            'user' => Auth::user()
+        ]);
     }
 }

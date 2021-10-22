@@ -33,6 +33,8 @@ Route::post('/forgotpass', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/newsAdd','NewsController@newsAdd');
+
 Route::get('/{any?}', function() {
     return view('app');
 })->middleware('auth');

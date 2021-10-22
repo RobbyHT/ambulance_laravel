@@ -34,6 +34,7 @@
         "@fullcalendar/daygrid": "^5.10.0",
         "@fullcalendar/interaction": "^5.10.0",
         "@fullcalendar/vue3": "^5.10.0",
+        "@tinymce/tinymce-vue": "^4.0.4",
         "font-awesome": "^4.7.0",
         "jquery-easy-loading": "^2.0.0-rc.2",
         "sweetalert2": "^10.0.2",

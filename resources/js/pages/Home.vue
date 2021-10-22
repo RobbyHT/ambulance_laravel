@@ -46,17 +46,20 @@
       </div>
       <div class="col-lg-4">
         <div class="news left_wrap">
-          <div class="toptitle d-flex align-items-center">
-            <i class="fas fa-bullhorn mr-2"></i>最新消息
-            <!--<div class="right d-flex align-items-stretch">
-              <a href="#" target="_self" style="color: black; font-size: 8px;">篩選</a>
-            </div>-->
+          <div class="toptitle align-items-center">
+            <div class="left align-items-center">
+              <i class="fas fa-bullhorn mr-2"></i>最新消息
+            </div>
+            <div class="right align-items-center">
+              <button class="newsAdd" data-toggle="modal" data-target="#newsModal">新增</button>
+              <!--<a href="#" target="_self" style="color: black; font-size: 8px;">篩選</a>-->
+            </div>
           </div>
           <ul>
             <li>
               <a href="https://ers.stsp.gov.tw/news/82">
                 <span class="badge badge-warning mr-1">消息</span>
-                <div class="top d-flex justify-content-start">
+                <div class="top justify-content-start">
                   <div class="title">轉知臺南市政府第一劑BNT疫苗預約接種資訊</div>
                 </div>
                 <div class="bottom">2021-10-21 09:13:58</div>
@@ -65,13 +68,28 @@
             <li>
               <a href="https://ers.stsp.gov.tw/news/81">
                 <span class="badge badge-warning mr-1">消息</span>
-                <div class="top d-flex justify-content-start">
+                <div class="top justify-content-start">
                   <div class="title">(更新轉知)臺南市政府開設臺南園區大型疫苗接種站</div>
                 </div>
                 <div class="bottom">2021-10-19 14:07:34</div>
               </a>
             </li>
           </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="newsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title col-form-label" id="exampleModalCenterTitle">最新消息</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="news-body">
+          <NewsAdd />
         </div>
       </div>
     </div>
@@ -83,12 +101,15 @@
   import dayGridPlugin from '@fullcalendar/daygrid'
   import interactionPlugin from '@fullcalendar/interaction'
   import '/css/home.css'
+  import NewsAdd from './news/news_add.vue'
   export default {
     components: {
-      FullCalendar // make the <FullCalendar> tag available
+      FullCalendar,
+      NewsAdd
     },
     data() {
       return {
+        isShow: false,
         eventData: [],
         calendarOptions: {
           plugins: [ dayGridPlugin, interactionPlugin ],
