@@ -21,4 +21,6 @@ class news extends Model
         'content',
         'user_id',
     ];
+
+    protected $casts = ['created_at' => 'datetime:Y-m-d H:i:s',];
 }

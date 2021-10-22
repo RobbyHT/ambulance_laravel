@@ -50,30 +50,27 @@
             <div class="left align-items-center">
               <i class="fas fa-bullhorn mr-2"></i>最新消息
             </div>
-            <div class="right align-items-center">
-              <button class="newsAdd" data-toggle="modal" data-target="#newsModal">新增</button>
-              <!--<a href="#" target="_self" style="color: black; font-size: 8px;">篩選</a>-->
-            </div>
+            <button class="newsAdd" data-toggle="modal" data-target="#newsModal" @click="newsView = 'add'">新增</button>
           </div>
-          <ul>
-            <li>
-              <a href="https://ers.stsp.gov.tw/news/82">
+          <ul ref="root">
+            <li v-for="news in newsData" :key="news.id">
+              <a href="javascript:void(0);" data-toggle="modal" data-target="#newsModal" @click="newsView = 'upd'; newsId = news.id;">
                 <span class="badge badge-warning mr-1">消息</span>
                 <div class="top justify-content-start">
-                  <div class="title">轉知臺南市政府第一劑BNT疫苗預約接種資訊</div>
+                  <div class="title">{{ news.title }}</div>
                 </div>
-                <div class="bottom">2021-10-21 09:13:58</div>
+                <div class="bottom">{{ news.created_at }}</div>
               </a>
             </li>
-            <li>
-              <a href="https://ers.stsp.gov.tw/news/81">
+            <!--<li>
+              <a href="javascript:void(0);" data-toggle="modal" data-target="#newsModal" @click="newsView = 'upd'; newsId = 2;">
                 <span class="badge badge-warning mr-1">消息</span>
                 <div class="top justify-content-start">
                   <div class="title">(更新轉知)臺南市政府開設臺南園區大型疫苗接種站</div>
                 </div>
                 <div class="bottom">2021-10-19 14:07:34</div>
               </a>
-            </li>
+            </li>-->
           </ul>
         </div>
       </div>
@@ -89,7 +86,8 @@
           </button>
         </div>
         <div class="news-body">
-          <NewsAdd />
+          <NewsAdd v-if="newsView === 'add'" />
+          <NewsUpd v-if="newsView === 'upd'" :newsId="newsId" />
         </div>
       </div>
     </div>
@@ -102,14 +100,18 @@
   import interactionPlugin from '@fullcalendar/interaction'
   import '/css/home.css'
   import NewsAdd from './news/news_add.vue'
+  import NewsUpd from './news/news_upd.vue'
   export default {
     components: {
       FullCalendar,
-      NewsAdd
+      NewsAdd,
+      NewsUpd
     },
     data() {
       return {
-        isShow: false,
+        newsView: "",
+        newsId: "",
+        newsData: [],
         eventData: [],
         calendarOptions: {
           plugins: [ dayGridPlugin, interactionPlugin ],
@@ -128,12 +130,32 @@
       },
       getEvents: function () {
         axios.get('/api/getEvents')
-             .then(resp => (this.calendarOptions.events = resp.data))
-             .catch(err => console.log(err.response.data));
+          .then(resp => (this.calendarOptions.events = resp.data))
+          .catch(err => console.log(err.response.data));
       },
+      getAllNews: function() {
+        var vm = this;
+
+        vm.$loader.show({
+          container: this.$refs.root
+        });
+        axios.get('/api/news')
+          .then(function (resp) {
+            vm.newsData = resp.data;
+            vm.$loader.hide();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     },
-    created: function() {
+    /*created: function() {
+      this.getAllNews();
       this.getEvents();
-    }
+    },*/
+    mounted() {        
+      this.getAllNews();
+      this.getEvents();
+    }, 
   }
 </script>

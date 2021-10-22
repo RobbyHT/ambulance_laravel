@@ -30,10 +30,11 @@ import App from './app.vue'*/
 import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router'
 //import VueRouter from 'vue-router';
+import { useLoading } from 'vue3-loading-overlay';
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 
 import routes from './routes.js';
 import App from './app.vue'
-
 
 /*createApp(App).use(router).mount('#app');*/
 
@@ -42,7 +43,18 @@ const router = createRouter({
     routes,
 })
 
-const app = createApp(App).use(router).mount('#app');
+const app = createApp(App).use(router)
+app.config.globalProperties.$loader = useLoading({
+    canCancel: false,
+    color: '#000000',
+    loader: 'dots', //spinner/dots/bars
+    width: 50,
+    height: 50,
+    backgroundColor: '#ffffff',
+    opacity: 0.8
+});
+app.config.globalProperties.$userId = document.querySelector("meta[name='user_id']").getAttribute('content');
+app.mount('#app');
 
 /*const vm = Vue.createApp({
     router,

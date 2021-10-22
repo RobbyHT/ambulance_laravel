@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\news;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Exception;
 
 class NewsController extends Controller
 {
@@ -15,7 +17,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        $data = news::all();
+        return response()->json($data);
     }
 
     /**
@@ -36,7 +39,18 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            news::create([
+                'title'=>$request->title,
+                'content'=>$request->content,
+                'user_id'=>$request->user_id,
+            ]);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
     }
 
     /**
@@ -45,9 +59,10 @@ class NewsController extends Controller
      * @param  \App\Models\news  $news
      * @return \Illuminate\Http\Response
      */
-    public function show(news $news)
+    public function show($id)
     {
-        //
+        $data = news::where('id', $id)->first();
+        return response()->json($data);
     }
 
     /**

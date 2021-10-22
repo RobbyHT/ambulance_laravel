@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 /*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });*/
+Route::post('error-info', 'auth\LoginController@errorInfo');
 
 Route::get('login','api\userController@login');
 Route::apiResource('user','api\userController');
@@ -25,6 +26,7 @@ Route::apiResource('car','api\CarController');
 Route::apiResource('dispatch','api\DispatchRecordController');
 Route::apiResource('dispatchEMT','api\DispatchEmtController');
 Route::apiResource('consumablesRecord','api\ConsumablesRecordController');
+Route::apiResource('news','api\NewsController');
 
 Route::get('checkTask','api\DispatchRecordController@checkTask');
 Route::get('userTake/{vm}','api\userController@userTake');

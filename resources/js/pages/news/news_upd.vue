@@ -49,7 +49,7 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-primary btn-lg btn-block mt-4" @click="addNews">建立</button>
+        <button class="btn btn-primary btn-lg btn-block mt-4" @click="updNews">儲存</button>
       </div>
     </div>
   </div>
@@ -61,6 +61,7 @@
     components: {
       Editor
     },
+    props: ["newsId"],
     data() {
       return {
         data: {
@@ -70,12 +71,22 @@
       }
     },
     methods: {
-      addNews: function() {
+      getNews: function() {
+        console.log(this.newsId);
+        var vm = this;
+        axios.get(`/api/news/${this.newsId}`)
+          .then(function (resp) {
+            vm.data = resp.data;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      },
+      updNews: function() {
         var vm = this;
         axios.post('/api/news', {
-          title: vm.data.title,
-          content: vm.data.content,
-          user_id: vm.$userId
+          _method: 'PUT',
+          data: vm.data
         })
         .then(function (resp) {
           vm.$parent.getAllNews();
@@ -86,10 +97,11 @@
       }
     },
     created: function() {
+      this.getNews();
       $(document).on('focusin', function(e) {
         if ($(e.target).closest(".tox-textfield").length)
           e.stopImmediatePropagation();
-      })
+      });
     }
   }
 </script>
