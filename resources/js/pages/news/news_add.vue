@@ -78,6 +78,7 @@
           user_id: vm.$userId
         })
         .then(function (resp) {
+          $('#newsModal').modal('hide');
           vm.$parent.getAllNews();
         })
         .catch(function (error) {

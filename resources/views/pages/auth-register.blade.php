@@ -198,11 +198,11 @@
                   <label class="text-bold-600 font-medium-5" for="gender"><span class="text-danger">(*)</span>性別</label>
                   <div class="">
                     <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" class="radio" id="c_gender_m" name="gender" value="男">
+                      <input type="radio" class="radio" id="c_gender_m" name="gender" value="M">
                       <label class="label" for="c_gender_m">男</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" class="radio" id="c_gender_f" name="gender" value="女">
+                      <input type="radio" class="radio" id="c_gender_f" name="gender" value="F">
                       <label class="label" for="c_gender_f">女</label>
                     </div>
                   </div>

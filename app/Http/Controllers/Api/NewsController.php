@@ -17,7 +17,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $data = news::all();
+        $data = news::orderByDesc('created_at')->get();
         return response()->json($data);
     }
 
@@ -83,9 +83,19 @@ class NewsController extends Controller
      * @param  \App\Models\news  $news
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, news $news)
+    public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            news::where('id', $id)->update([
+                'title'=>$request->data['title'],
+                'content'=>$request->data['content']
+            ]);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
     }
 
     /**
@@ -94,8 +104,15 @@ class NewsController extends Controller
      * @param  \App\Models\news  $news
      * @return \Illuminate\Http\Response
      */
-    public function destroy(news $news)
+    public function destroy($id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            news::where('id', $id)->delete();
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
     }
 }

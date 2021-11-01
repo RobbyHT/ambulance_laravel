@@ -16,7 +16,11 @@ class CarController extends Controller
      */
     public function index()
     {
-        //
+        $data = Car::join('users', 'cars.driver_id', 'users.id')
+            ->select('cars.*', 'users.name')
+            ->orderByDesc('cars.created_at')
+            ->get();
+        return response()->json($data);
     }
 
     /**
@@ -48,9 +52,13 @@ class CarController extends Controller
      * @param  \App\Models\car  $car
      * @return \Illuminate\Http\Response
      */
-    public function show(car $car)
+    public function show($id)
     {
-        //
+        $data = Car::join('users', 'cars.driver_id', 'users.id')
+            ->where('cars.id', $id)
+            ->select('cars.*', 'users.name')
+            ->first();
+        return response()->json($data);
     }
 
     /**
@@ -71,9 +79,12 @@ class CarController extends Controller
      * @param  \App\Models\car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, car $car)
+    public function update(Request $request, $id)
     {
-        //
+        car::where('id', $id)->update([
+            'plate'=>$request->date['plate'],
+            'driver_id'=>$request->date['driver_id']
+        ]);
     }
 
     /**

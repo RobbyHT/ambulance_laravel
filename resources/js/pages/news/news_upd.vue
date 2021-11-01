@@ -1,4 +1,3 @@
-<!--<script src="{{asset('js/scripts/tinymce/tinymce.min.js')}}"></script>-->
 <template>
   <div class="card">
     <div class="col-md-12">
@@ -8,7 +7,6 @@
           <ul class="tab-links"></ul>
           <div class="tab-content">
             <div class="tab template-content">
-              <input type="hidden" class="lang">
               <div class="form-group row mb-1">
                 <label for="title" class="col-sm-3 col-form-label text-right">
                   標題：
@@ -72,7 +70,6 @@
     },
     methods: {
       getNews: function() {
-        console.log(this.newsId);
         var vm = this;
         axios.get(`/api/news/${this.newsId}`)
           .then(function (resp) {
@@ -84,11 +81,12 @@
       },
       updNews: function() {
         var vm = this;
-        axios.post('/api/news', {
+        axios.post(`/api/news/${this.newsId}`, {
           _method: 'PUT',
           data: vm.data
         })
         .then(function (resp) {
+          $('#newsModal').modal('hide');
           vm.$parent.getAllNews();
         })
         .catch(function (error) {
@@ -96,12 +94,19 @@
         });
       }
     },
-    created: function() {
+    mounted: function() {
       this.getNews();
       $(document).on('focusin', function(e) {
         if ($(e.target).closest(".tox-textfield").length)
           e.stopImmediatePropagation();
       });
+    },
+    created: function() {
+      /*this.getNews();
+      $(document).on('focusin', function(e) {
+        if ($(e.target).closest(".tox-textfield").length)
+          e.stopImmediatePropagation();
+      });*/
     }
   }
 </script>

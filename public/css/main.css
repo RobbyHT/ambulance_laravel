@@ -12,3 +12,19 @@ body {
 .content {
   font-size: 18px;
 }
+.main {
+  margin-top: 80px;
+  padding: 3vmin;
+}
+.custom-control-inline {
+  display: inline-flex;
+  align-items: center;
+}
+.radio {
+  vertical-align: middle;
+  margin-right: 5px;
+  zoom: 180%;
+}
+label {
+  margin-bottom: 0;
+}

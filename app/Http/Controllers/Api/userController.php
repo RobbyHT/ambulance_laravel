@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Crypt;
+use PhpParser\Node\Stmt\TryCatch;
 
 class userController extends Controller
 {
@@ -16,7 +18,10 @@ class userController extends Controller
      */
     public function index()
     {
-        $data = User::all();
+        $data = User::join('companies', 'companies.id', 'users.c_id')
+            ->select('users.*', 'companies.c_name')
+            ->orderByDesc('created_at')
+            ->get();
         return response()->json($data);
     }
 
@@ -49,9 +54,18 @@ class userController extends Controller
      * @param  \App\Models\User  $User
      * @return \Illuminate\Http\Response
      */
-    public function show(User $User)
+    public function show($id)
     {
-        //
+        $data = User::join('companies', 'companies.id', 'users.c_id')
+            ->where('users.id', $id)
+            ->select('users.*', 'companies.c_name')
+            ->first();
+        try {
+            $data['perid'] = Crypt::decryptString($data['perid']);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        return response()->json($data);
     }
 
     /**
@@ -72,9 +86,20 @@ class userController extends Controller
      * @param  \App\Models\User  $User
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $User)
+    public function update(Request $request, $id)
     {
-        //
+        if($request->data['permission'] != ''){
+            User::where('id', $id)->update([
+                'permission' => $request->data['permission'],
+            ]);
+        }else{
+            User::where('id', $id)->update([
+                'name'=>$request->data['name'],
+                'gender'=>$request->data['gender'],
+                'birther'=>$request->data['birther'],
+                'telphone'=>$request->data['telphone']
+            ]);
+        }
     }
 
     /**
@@ -83,9 +108,9 @@ class userController extends Controller
      * @param  \App\Models\User  $User
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $User)
+    public function destroy(Request $request)
     {
-        //
+        User::whereIn('id', $request->id)->delete();
     }
 
     public function login(Request $request)

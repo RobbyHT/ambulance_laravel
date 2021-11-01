@@ -15,4 +15,9 @@ class car extends Model
         'driver_id',
         'expiry_date',
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
 }

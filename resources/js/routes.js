@@ -10,9 +10,14 @@ const routes = [
     component: () => import('./Pages/About.vue')
   },
   {
-    path: '/newsAdd',
-    name: 'newsAdd',
-    component: () => import('./Pages/news/news_add.vue')
+    path: '/userAdmin',
+    name: 'userAdmin',
+    component: () => import('./Pages/user/user_index.vue')
+  },
+  {
+    path: '/carAdmin',
+    name: 'carAdmin',
+    component: () => import('./Pages/car/car_index.vue')
   },
 ]
 

@@ -84,20 +84,6 @@
 .navbar-collapse {
   padding-right: 3vmin;
 }
-.table {
-  font-size: 1.1rem;
-  table-layout: fixed;
-  margin-top: 2vmin;
-}
-.table tr {
-  display: flex;
-  margin-bottom: 1vmin;
-}
-.table th, .table td {
-  padding: 0.4rem 0.8rem;
-  border-top: 0;
-  border-bottom: 1px solid #dee2e6;
-}
 .news {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 2vmin;

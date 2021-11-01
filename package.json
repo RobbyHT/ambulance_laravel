@@ -34,10 +34,14 @@
         "@fullcalendar/daygrid": "^5.10.0",
         "@fullcalendar/interaction": "^5.10.0",
         "@fullcalendar/vue3": "^5.10.0",
+        "@jobinsjp/vue3-datatable": "^1.0.12",
         "@tinymce/tinymce-vue": "^4.0.4",
+        "crypto-js": "^4.1.1",
+        "datatables.net-dt": "^1.11.3",
         "font-awesome": "^4.7.0",
         "jquery-easy-loading": "^2.0.0-rc.2",
         "sweetalert2": "^10.0.2",
+        "vue-cryptojs": "^2.1.6",
         "vue3-loading-overlay": "0.0.0",
         "xlsx": "^0.17.0"
     }
