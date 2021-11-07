@@ -16,6 +16,11 @@ body {
   margin-top: 80px;
   padding: 3vmin;
 }
+.contentDiv {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2vmin;
+  font-size: 1.1rem;
+}
 .custom-control-inline {
   display: inline-flex;
   align-items: center;
@@ -27,4 +32,11 @@ body {
 }
 label {
   margin-bottom: 0;
+}
+.item-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.iconImg-4 {
+  width: 2rem;
 }

@@ -14,6 +14,7 @@ class car extends Model
         'plate',
         'driver_id',
         'expiry_date',
+        'factory_date',
     ];
 
     protected $casts = [

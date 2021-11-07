@@ -41,9 +41,16 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        /*$data = $request->all();
         $resoult = car::updateOrCreate(['id' => $request->id], $data);
-        return response($resoult, Response::HTTP_OK);
+        return response($resoult, Response::HTTP_OK);*/
+
+        car::create([
+            'plate'=>$request->data['plate'],
+            'driver_id'=>$request->data['driver_id'],
+            'factory_date'=>$request->data['factory_date'],
+            'expiry_date'=>$request->data['expiry_date'],
+        ]);
     }
 
     /**
@@ -82,8 +89,10 @@ class CarController extends Controller
     public function update(Request $request, $id)
     {
         car::where('id', $id)->update([
-            'plate'=>$request->date['plate'],
-            'driver_id'=>$request->date['driver_id']
+            'plate'=>$request->data['plate'],
+            'driver_id'=>$request->data['driver_id'],
+            'factory_date'=>$request->data['factory_date'],
+            'expiry_date'=>$request->data['expiry_date']
         ]);
     }
 
@@ -93,8 +102,8 @@ class CarController extends Controller
      * @param  \App\Models\car  $car
      * @return \Illuminate\Http\Response
      */
-    public function destroy(car $car)
+    public function destroy(Request $request)
     {
-        //
+        car::whereIn('id', $request->id)->delete();
     }
 }

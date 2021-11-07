@@ -26,7 +26,7 @@
                     <option v-for="user in userData" 
                       :key="user.id" 
                       :value="user.id">
-                        {{ user.name }}
+                      {{ user.name }}
                     </option>
                   </select>
                 </div>
@@ -36,7 +36,7 @@
                   出廠日期：
                   <span class="text-danger">*</span>
                 </label>
-                <div class="col-sm-9 col-form-label">
+                <div class="col-sm-9 col-form-label text-left">
                   <input type="date" class="form-control" v-model="data.factory_date" />
                 </div>
               </div>
@@ -52,18 +52,22 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-primary btn-lg btn-block mt-4" @click="updCar">儲存</button>
+        <button class="btn btn-primary btn-lg btn-block mt-4" @click="addCar">建立</button>
       </div>
     </div>
   </div>
 </template>
 <script>
   export default {
-    props: ["carId"],
     data() {
       return {
-        data: [],
-        userData: []
+        userData: [],
+        data: {
+          plate: '',
+          driver_id: '',
+          factory_date: '',
+          expiry_date: ''
+        }
       }
     },
     methods: {
@@ -77,51 +81,27 @@
             console.log(error);
           });
       },
-      getCar: function() {
+      addCar: function() {
         var vm = this;
-        axios.get(`/api/car/${vm.carId}`)
-          .then(function (resp) {
-            vm.data = resp.data;
+        axios.post(`/api/car`, {
+          data: vm.data
+        })
+        .then(function (resp) {
+          vm.$swal.fire({
+            title: '新增成功！',
+            icon: "success",
+            confirmButtonClass: 'btn btn-success',
           })
-          .catch(function (error) {
-            console.log(error);
-          });
-      },
-      updCar: function() {
-        var vm = this;
-        vm.$swal.fire({
-          title: '確認修改？',
-          icon: 'warning',
-          showCancelButton: true,
-            confirmButtonText: '確認',
-            cancelButtonText: '取消',
-            confirmButtonClass: 'btn btn-warning',
-            cancelButtonClass: 'btn btn-danger ml-1',
-        }).then(function (result) {
-          if (result.value) {
-            axios.post(`/api/car/${vm.carId}`, {
-              _method: 'PUT',
-              data: vm.data
-            })
-            .then(function (resp) {
-              vm.$swal.fire({
-                title: '修改成功！',
-                icon: "success",
-                confirmButtonClass: 'btn btn-success',
-              })
-              $('#carModal').modal('hide');
-              vm.$parent.getAllCar();
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-          }
+          $('#carModal').modal('hide');
+          vm.$parent.getAllCar();
+        })
+        .catch(function (error) {
+          console.log(error);
         });
       }
     },
     mounted: function() {
       this.getUser();
-      this.getCar();
     }
   }
 </script>

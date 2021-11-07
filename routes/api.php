@@ -34,3 +34,5 @@ Route::get('driverTask/{userid}','api\DispatchRecordController@driverTask');
 Route::get('emtTask/{userid}','api\DispatchRecordController@emtTask');
 Route::get('getEvents','api\DispatchRecordController@getEvents');
 
+Route::post('dispatchCount','api\ChartController@dispatchCount');
+

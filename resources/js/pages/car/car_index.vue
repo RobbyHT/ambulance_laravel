@@ -1,9 +1,9 @@
 <style scoped>
-  @import '/css/user.css';
+  @import '/css/car.css';
 </style>
 <template>
   <div class="main">
-    <div class="userDiv">
+    <div class="contentDiv">
       <div class="dialog-bottom col-12">
         <div class="col-4 dialog-title">
           車輛管理
@@ -13,13 +13,13 @@
             <input type="search" class="form-control light-table-filter" data-table="table" placeholder="請輸入關鍵字" @keyup="searchTab">
           </div>
           <div class="col-3 text-center">
-            <a href="javascript:void(0);" onclick="UserAddForm()">
+            <a href="javascript:void(0);" data-toggle="modal" data-target="#carModal" @click="carView = 'add';">
               <img src="/img/人員管理-新增Icon.png" class="iconImg-4" alt="新增" title="新增">
               <span class="userInsBtn">新增</span>
             </a>
           </div>
           <div class="col-3 text-center">
-            <a href="javascript:void(0);" @click="delUser">
+            <a href="javascript:void(0);" @click="delCar">
               <img  src="/img/人員管理-刪除Icon.png" class="iconImg-4" alt="刪除" title="刪除">
               <span class="userDelBtn">刪除</span>
             </a>
@@ -30,7 +30,7 @@
         <thead>
           <tr>
             <th style="width: 5%;">
-              <input type="checkbox" id="select_all" style="vertical-align:sub;zoom:150%;">
+              <input type="checkbox" @change="selectAll" style="vertical-align:sub;zoom:150%;">
             </th>
             <th style="width: 8%;">編號</th>
             <th style="width: 10%;">車牌</th>
@@ -78,6 +78,7 @@
           </button>
         </div>
         <div class="car-body">
+          <CarAdd v-if="carView === 'add'" />
           <CarUpd v-if="carView === 'upd'" :carId="carId" :key="carId" />
           <CarShow v-if="carView === 'show'" :carId="carId" :key="carId" />
         </div>
@@ -88,11 +89,13 @@
 <script>
   import "datatables.net-dt/js/dataTables.dataTables"
   import "datatables.net-dt/css/jquery.dataTables.min.css"
+  import CarAdd from './car_add.vue'
   import CarUpd from './car_upd.vue'
   import CarShow from './car_show.vue'
 
   export default {
     components: {
+      CarAdd,
       CarUpd,
       CarShow
     },
@@ -165,7 +168,7 @@
         }).then(function (result) {
           if (result.value) {
             var checked = []
-            $("input[name='user[]']:checked").each(function ()
+            $("input[name='car[]']:checked").each(function ()
             {
               if($(this).val() != 0){
                 checked.push(parseInt($(this).val()));
@@ -189,6 +192,10 @@
             });
           }
         });
+      },
+      selectAll: function(event) {
+        var rows = this.carTab.rows({ search: 'applied' }).nodes();
+        $("input[name='car[]']", rows).prop('checked', event.target.checked);
       }
     },
     mounted() {
