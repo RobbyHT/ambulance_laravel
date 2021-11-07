@@ -3,7 +3,7 @@
 </style>
 <template>
   <div class="main">
-    <div class="userDiv">
+    <div class="contentDiv">
       <div class="dialog-bottom col-12">
         <div class="col-4 dialog-title">
           人員管理

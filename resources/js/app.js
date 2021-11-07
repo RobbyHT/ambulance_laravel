@@ -34,6 +34,7 @@ import { useLoading } from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import CryptoJS from 'crypto-js'
 import swal from 'sweetalert2'
+import moment from 'moment'
 
 import routes from './routes.js';
 import App from './app.vue'
@@ -57,6 +58,7 @@ app.config.globalProperties.$loader = useLoading({
 });
 app.config.globalProperties.$CryptoJS = CryptoJS;
 app.config.globalProperties.$swal = swal;
+app.config.globalProperties.$moment = moment;
 app.config.globalProperties.$userId = document.querySelector("meta[name='user_id']").getAttribute('content');
 app.mount('#app');
 

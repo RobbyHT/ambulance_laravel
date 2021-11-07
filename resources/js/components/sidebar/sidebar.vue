@@ -59,7 +59,7 @@
     <SidebarLink to="/carAdmin" icon="fas fa-ambulance">車輛管理</SidebarLink>
     <SidebarLink to="/equipment" icon="fas fa-first-aid">設備管理</SidebarLink>
     <SidebarLink to="/evaluation" icon="fas fa-file-medical">評鑑管理</SidebarLink>
-    <SidebarLink to="/statistics" icon="fas fa-chart-line">統計分析</SidebarLink>
+    <SidebarLink to="/analysisAdmin" icon="fas fa-chart-line">統計分析</SidebarLink>
 
     <span
       class="collapse-icon"

@@ -19,6 +19,11 @@ const routes = [
     name: 'carAdmin',
     component: () => import('./Pages/car/car_index.vue')
   },
+  {
+    path: '/analysisAdmin',
+    name: 'analysisAdmin',
+    component: () => import('./Pages/analysis/analysis.vue')
+  },
 ]
 
 export default routes;
