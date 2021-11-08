@@ -11,7 +11,7 @@ html body {
 html .bg-full-screen-image {
   /*background: url(/img/登入頁面_純背景.png?539bae5…) no-repeat center center;*/
 
-  background: url('/img/bg-02.png'), -webkit-linear-gradient(left, #3931af, #00c6ff);
+  background: url('/img/bg-02.png'), -webkit-linear-gradient(left, #133b5c, #ceddef);
   /*background-image: url('../img/bg-02.png');*/
   background-size: cover;
 }

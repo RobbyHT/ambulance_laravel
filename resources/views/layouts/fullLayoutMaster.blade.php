@@ -24,7 +24,7 @@
     <div class="content-overlay"></div>
     <div class="content-wrapper">
       <div class="content-header-left col-12 pt-1 bg-header">
-        <img class="header-img" src="{{ asset('img/logo.png') }}" alt="logo">
+        <img class="header-img" src="{{ asset('img/new_logo.png') }}" alt="logo">
       </div>
       <div class="content-body">
         @yield('content')
