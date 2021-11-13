@@ -33,6 +33,7 @@
         "@fullcalendar/core": "^5.10.0",
         "@fullcalendar/daygrid": "^5.10.0",
         "@fullcalendar/interaction": "^5.10.0",
+        "@fullcalendar/list": "^5.10.1",
         "@fullcalendar/vue3": "^5.10.0",
         "@jobinsjp/vue3-datatable": "^1.0.12",
         "@tinymce/tinymce-vue": "^4.0.4",

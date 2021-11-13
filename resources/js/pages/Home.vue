@@ -86,6 +86,7 @@
   import FullCalendar from '@fullcalendar/vue3'
   import dayGridPlugin from '@fullcalendar/daygrid'
   import interactionPlugin from '@fullcalendar/interaction'
+  import listPlugin from '@fullcalendar/list'
   import NewsAdd from './news/news_add.vue'
   import NewsUpd from './news/news_upd.vue'
   export default {
@@ -101,8 +102,18 @@
         newsData: [],
         eventData: [],
         calendarOptions: {
-          plugins: [ dayGridPlugin, interactionPlugin ],
-          initialView: 'dayGridMonth',
+          headerToolbar : {
+            end: 'prevYear,prev today next,nextYear,dayGridMonth,listMonth',
+            //center: 'title',
+            start: 'title',
+          },
+          /*header: { // 頂部排版
+            left: "prev,next today", // 左邊放置上一頁、下一頁和今天
+            center: "title", // 中間放置標題
+            right: "month,agendaWeek,agendaDay,listMonth" // 右邊放置月、周、天
+          },*/
+          plugins: [ dayGridPlugin, interactionPlugin, listPlugin ],
+          initialView: 'listMonth',
           dateClick: this.handleDateClick,
           events: [],
           eventClick: function(event) {
