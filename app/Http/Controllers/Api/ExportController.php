@@ -6,15 +6,21 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\User;
+use App\Exports\UserDataExport;
+use Illuminate\Support\Facades\Auth;
 
 class ExportController extends Controller
 {
-    public function userTake($vm)
+    public function exportUser(Request $request)
     {
-        
-        $coll = new UserErrorExport($errorItems);
+        $data = User::where('c_id', $request->c_id)
+            ->select('account', 'name', 'gender', 'birther', 'perid', 'email', 'telphone', 'license_VP', 'created_at')
+            ->get();
 
-        Excel::store($coll, 'public/excel/usersError.xlsx');
-        return asset('storage/excel/usersError.xlsx');
+        $data = json_decode(json_encode($data), true);
+        $coll = new UserDataExport($data);
+
+        Excel::store($coll, 'public/excel/userData.xlsx');
+        return asset('storage/excel/userData.xlsx');
     }
 }

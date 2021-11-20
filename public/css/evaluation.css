@@ -1,0 +1,26 @@
+.item-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.evaMain {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2vmin;
+  margin: 3vmin 0;
+  padding-top: 2vmin;
+  height: 80vmin;
+}
+.evaMain .title {
+  color: #0C2A85;
+  font-size: 2rem;
+  font-weight: bolder;
+  padding-bottom: 3px; 
+  border-bottom: 5px solid #6B92CF;
+}
+.evaMain .content {
+  color: #000000;
+  font-size: 1.3rem;
+  font-weight: bolder;
+  padding: 3vmin 5vmin;
+  text-align: left;
+  max-height: 25vmin;
+}

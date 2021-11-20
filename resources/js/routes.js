@@ -24,6 +24,11 @@ const routes = [
     name: 'analysisAdmin',
     component: () => import('./Pages/analysis/analysis.vue')
   },
+  {
+    path: '/evaluation',
+    name: 'evaluation',
+    component: () => import('./Pages/evaluation/evaluation.vue')
+  },
 ]
 
 export default routes;

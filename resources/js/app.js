@@ -60,6 +60,7 @@ app.config.globalProperties.$CryptoJS = CryptoJS;
 app.config.globalProperties.$swal = swal;
 app.config.globalProperties.$moment = moment;
 app.config.globalProperties.$userId = document.querySelector("meta[name='user_id']").getAttribute('content');
+app.config.globalProperties.$cId = document.querySelector("meta[name='c_id']").getAttribute('content');
 app.mount('#app');
 
 /*const vm = Vue.createApp({

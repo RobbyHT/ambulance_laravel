@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @if (Auth::check()) 
       <meta name="user_id" content="{{ Auth::user()->id }}" />
+      <meta name="c_id" content="{{ Auth::user()->c_id }}" />
     @endif 
 
     <title>醫指派</title>

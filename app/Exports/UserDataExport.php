@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
 
-class UserErrorExport implements FromArray, ShouldAutoSize, WithEvents, WithTitle, WithHeadings, WithStrictNullComparison
+class UserDataExport implements FromArray, ShouldAutoSize, WithEvents, WithTitle, WithHeadings, WithStrictNullComparison
 {
     protected $invoices;
 
@@ -30,23 +30,21 @@ class UserErrorExport implements FromArray, ShouldAutoSize, WithEvents, WithTitl
      */
     public function title(): string
     {
-        return '用戶資料';
+        return '員工資料';
     }
 
     public function headings(): array
     {
         return [
             '帳號',
-            '電子郵件',
             '姓名',
             '性別',
-            '身分證字號',
             '出生年月日',
-            '公司',
-            '單位',
-            '職稱',
+            '身分證字號',
+            '電子郵件',
             '電話',
-            '錯誤訊息',
+            '證照到期日',
+            '建立日期',
         ];
     }
 
@@ -60,20 +58,20 @@ class UserErrorExport implements FromArray, ShouldAutoSize, WithEvents, WithTitl
                     ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
                     ->getStartColor()->setARGB('D9D9D9');
                 $widths = [
-                    'A' => 10, 'B' => 25, 'C' => 10, 'D' => 10, 'E' => 15, 
-                    'F' => 15, 'G' => 25, 'H' => 10, 'I' => 10, 'J' => 15, 'K' => 40
+                    'A' => 15, 'B' => 20, 'C' => 10, 'D' => 10, 'E' => 15, 
+                    'F' => 15, 'G' => 25, 'H' => 15, 'I' => 15
                 ];
                 foreach ($widths as $k => $v) {
                     // 設定列寬度
                     $sheet->getColumnDimension($k)->setAutoSize(false);
                     $sheet->getColumnDimension($k)->setWidth($v);
                 }
-                $sheet->getStyle('A1:K1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $sheet->getStyle('A1:K1')->getFont()->setBold(true);
+                $sheet->getStyle('A1:I1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                $sheet->getStyle('A1:I1')->getFont()->setBold(true);
 
                 $rows_count = $sheet->getHighestDataRow();
 
-                $sheet->getStyle("K2:K".($rows_count))->getFont()->getColor()->setARGB('FF0000');
+                $sheet->getStyle("I2:I".($rows_count))->getFont()->getColor()->setARGB('FF0000');
             },
         ];
     }

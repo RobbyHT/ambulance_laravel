@@ -36,3 +36,6 @@ Route::get('getEvents','api\DispatchRecordController@getEvents');
 
 Route::post('dispatchCount','api\ChartController@dispatchCount');
 
+Route::post('exportUser','api\ExportController@exportUser');
+
+
