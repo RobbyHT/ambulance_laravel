@@ -3,57 +3,51 @@
 </style>
 <template>
   <div class="main">
-    <div class="contentDiv">
+    <div class="tableDiv">
       <div class="dialog-bottom col-12">
         <div class="col-4 dialog-title">
-          車輛管理
+          設備管理
         </div>
         <div class="col-8" style="margin-left: auto; order: 2; display: inline-flex; align-items: center;">
           <div class="col-6 input-wrapper">
             <input type="search" class="form-control light-table-filter" data-table="table" placeholder="請輸入關鍵字" @keyup="searchTab">
           </div>
           <div class="col-3 text-center">
-            <a href="javascript:void(0);" data-toggle="modal" data-target="#carModal" @click="carView = 'add';">
+            <a href="javascript:void(0);" data-toggle="modal" data-target="#equipmentModal" @click="equipmentView = 'add';">
               <img src="/img/人員管理-新增Icon.png" class="iconImg-4" alt="新增" title="新增">
               <span class="userInsBtn">新增</span>
             </a>
           </div>
           <div class="col-3 text-center">
-            <a href="javascript:void(0);" @click="delCar">
+            <a href="javascript:void(0);" @click="delEquipment">
               <img  src="/img/人員管理-刪除Icon.png" class="iconImg-4" alt="刪除" title="刪除">
               <span class="userDelBtn">刪除</span>
             </a>
           </div>
         </div>
       </div>
-      <table class="table table-hover" id="carTab">
+      <table class="table table-hover" id="equipmentTab">
         <thead>
           <tr>
             <th style="width: 5%;">
               <input type="checkbox" @change="selectAll" style="vertical-align:sub;zoom:150%;">
             </th>
-            <th style="width: 8%;">編號</th>
-            <th style="width: 10%;">車牌</th>
-            <th style="width: 15%;">所屬司機</th>
-            <th style="width: 15%;">到期日</th>
-            <th style="width: 15%;">建立日期</th>
-            <th style="width: 15%;">最後修改日期</th>
-            <th style="width: 8%;">編輯</th>
+            <th style="width: 10%;">編號</th>
+            <th style="width: 50%;">設備名稱</th>
+            <th style="width: 20%;">數量</th>
+            <th style="width: 25%;">編輯</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(car, index) in carData" :key="car.id">
+          <tr v-for="(equipment, index) in equipmentData" :key="equipment.id">
             <td>
-              <input type="checkbox" :id="'car'+index" name="car[]" :value="car.id" style="vertical-align:sub;zoom:150%;">
+              <input type="checkbox" :id="'equipment'+index" name="equipment[]" :value="equipment.id" style="vertical-align:sub;zoom:150%;">
             </td>
             <td align="center">{{index+1}}</td>
-            <td align="center">{{car.plate}}</td>
-            <td align="center">{{car.name}}</td>
-            <td align="center">{{car.expiry_date}}</td>
-            <td align="center">{{car.created_at}}</td>
-            <td align="center">{{car.updated_at}}</td>
+            <td align="center">{{equipment.name}}</td>
+            <td align="center">{{equipment.amount}}</td>
             <td align="center">
-              <a href="javascript:void(0);" data-toggle="modal" data-target="#carModal" @click="carView = 'upd'; carId = car.id;">
+              <a href="javascript:void(0);" data-toggle="modal" data-target="#equipmentModal" @click="equipmentView = 'upd'; equipmentId = equipment.id;">
                 <img src="/img/人員管理-編輯Icon.png" class="iconImg-4" alt="編輯" title="編輯">
               </a>
             </td>
@@ -61,26 +55,26 @@
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="8">
+            <td colspan="5">
             </td>
           </tr>
         </tfoot>
       </table>
     </div>
   </div>
-  <div class="modal fade" id="carModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal fade" id="equipmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title col-form-label" id="exampleModalCenterTitle">車輛管理</h5>
+          <h5 class="modal-title col-form-label" id="exampleModalCenterTitle">設備管理</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="car-body">
-          <CarAdd v-if="carView === 'add'" />
-          <CarUpd v-if="carView === 'upd'" :carId="carId" :key="carId" />
-          <CarShow v-if="carView === 'show'" :carId="carId" :key="carId" />
+        <div class="equipment-body">
+          <EquipmentAdd v-if="equipmentView === 'add'" />
+          <EquipmentUpd v-if="equipmentView === 'upd'" :equipmentId="equipmentId" :key="equipmentId" />
+          <EquipmentShow v-if="equipmentView === 'show'" :equipmentId="equipmentId" :key="equipmentId" />
         </div>
       </div>
     </div>
@@ -89,40 +83,40 @@
 <script>
   import "datatables.net-dt/js/dataTables.dataTables"
   import "datatables.net-dt/css/jquery.dataTables.min.css"
-  import CarAdd from './car_add.vue'
-  import CarUpd from './car_upd.vue'
-  import CarShow from './car_show.vue'
+  import EquipmentAdd from './equipment_add.vue'
+  import EquipmentUpd from './equipment_upd.vue'
+  import EquipmentShow from './equipment_show.vue'
 
   export default {
     components: {
-      CarAdd,
-      CarUpd,
-      CarShow
+      EquipmentAdd,
+      EquipmentUpd,
+      EquipmentShow
     },
     data() {
       return {
-        carView: "",
-        carId: "",
-        carData: [],
-        carTab: null
+        equipmentView: "",
+        equipmentId: "",
+        equipmentData: [],
+        equipmentTab: null
       }
     },
     methods: {
-      getAllCar: async function() {
+      getAllEquipment: async function() {
         var vm = this;
         vm.$loader.show({
           container: this.$refs.root
         });
-        await axios.get('/api/car')
+        await axios.get('/api/equipment')
         .then(function (resp) {
-          vm.carData = resp.data;
+          vm.equipmentData = resp.data;
           vm.$loader.hide();
         })
         .catch(function (error) {
           console.log(error);
         });
 
-        vm.carTab = $('#carTab').DataTable({
+        vm.equipmentTab = $('#equipmentTab').DataTable({
             "lengthChange": false,
             "pageLength": 10,
             "ordering": true,
@@ -147,15 +141,15 @@
               }
             }
           });
-          $("#carTab_filter").hide();
-          $('#carTab').removeClass('no-footer');
-          $('tfoot>tr>td').append($('#carTab_info').get());
-          $('tfoot>tr>td').append($('#carTab_paginate').get());
+          $("#equipmentTab_filter").hide();
+          $('#equipmentTab').removeClass('no-footer');
+          $('tfoot>tr>td').append($('#equipmentTab_info').get());
+          $('tfoot>tr>td').append($('#equipmentTab_paginate').get());
       },
       searchTab: function(event) {
-        this.carTab.search( event.target.value ).draw();
+        this.equipmentTab.search( event.target.value ).draw();
       },
-      delCar: function() {
+      delEquipment: function() {
         var vm = this;
         vm.$swal.fire({
           title: '確認刪除？',
@@ -168,14 +162,14 @@
         }).then(function (result) {
           if (result.value) {
             var checked = []
-            $("input[name='car[]']:checked").each(function ()
+            $("input[name='equipment[]']:checked").each(function ()
             {
               if($(this).val() != 0){
                 checked.push(parseInt($(this).val()));
               }
             });
 
-            axios.post(`/api/car/0`, {
+            axios.post(`/api/equipment/0`, {
               _method: 'DELETE',
               id: checked
             })
@@ -185,7 +179,7 @@
                 icon: "success",
                 confirmButtonClass: 'btn btn-success',
               })
-              vm.getAllCar();
+              vm.getAllEquipment();
             })
             .catch(function (error) {
               console.log(error);
@@ -194,12 +188,12 @@
         });
       },
       selectAll: function(event) {
-        var rows = this.carTab.rows({ search: 'applied' }).nodes();
-        $("input[name='car[]']", rows).prop('checked', event.target.checked);
+        var rows = this.equipmentTab.rows({ search: 'applied' }).nodes();
+        $("input[name='equipment[]']", rows).prop('checked', event.target.checked);
       }
     },
     mounted() {
-      this.getAllCar();
+      this.getAllEquipment();
     }, 
   }
 </script>

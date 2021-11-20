@@ -8,7 +8,7 @@
         <div class="evaMain text-center">
           <span class="title">評鑑管理</span>
           <div class="content">
-            <button class="" @click="exportUser">匯出員工清單</button>
+            <button type="button" class="btn btn-primary" style="width:150px;height:40px;" @click="exportUser">匯出員工清單</button>
           </div>
         </div>
       </div>
@@ -18,7 +18,7 @@
 <script>
   export default {
     components: {
-        //
+      //
     },
     data() {
       return {

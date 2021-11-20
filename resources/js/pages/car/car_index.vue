@@ -3,7 +3,7 @@
 </style>
 <template>
   <div class="main">
-    <div class="contentDiv">
+    <div class="tableDiv">
       <div class="dialog-bottom col-12">
         <div class="col-4 dialog-title">
           車輛管理

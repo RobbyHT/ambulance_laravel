@@ -122,3 +122,14 @@ table.dataTable tbody th, table.dataTable tbody td {
   padding: 0.4rem 0.5rem;
   vertical-align: middle;
 }
+.ui-checkboxradio-radio-label.ui-checkboxradio-checked .ui-icon, .ui-checkboxradio-radio-label.ui-checkboxradio-checked:hover .ui-icon {
+  width: 14px !important;
+  height: 14px !important;
+}
+legend {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+fieldset label {
+  margin-right: 1vmin !important;
+}

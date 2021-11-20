@@ -3,7 +3,7 @@
 </style>
 <template>
   <div class="main">
-    <div class="contentDiv">
+    <div class="tableDiv">
       <div class="dialog-bottom col-12">
         <div class="col-4 dialog-title">
           人員管理
@@ -12,12 +12,7 @@
           <div class="col-6 input-wrapper">
             <input type="search" class="form-control light-table-filter" data-table="table" placeholder="請輸入關鍵字" @keyup="searchTab">
           </div>
-          <div class="col-3 text-center">
-            <a href="javascript:void(0);" onclick="UserAddForm()">
-              <img src="/img/人員管理-新增Icon.png" class="iconImg-4" alt="新增" title="新增">
-              <span class="userInsBtn">新增</span>
-            </a>
-          </div>
+          <div class="col-3 text-center"></div>
           <div class="col-3 text-center">
             <a href="javascript:void(0);" @click="delUser">
               <img  src="/img/人員管理-刪除Icon.png" class="iconImg-4" alt="刪除" title="刪除">

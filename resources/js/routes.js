@@ -20,14 +20,19 @@ const routes = [
     component: () => import('./Pages/car/car_index.vue')
   },
   {
-    path: '/analysisAdmin',
-    name: 'analysisAdmin',
-    component: () => import('./Pages/analysis/analysis.vue')
+    path: '/equipment',
+    name: 'equipment',
+    component: () => import('./Pages/equipment/equipment_index.vue')
   },
   {
     path: '/evaluation',
     name: 'evaluation',
     component: () => import('./Pages/evaluation/evaluation.vue')
+  },
+  {
+    path: '/analysisAdmin',
+    name: 'analysisAdmin',
+    component: () => import('./Pages/analysis/analysis.vue')
   },
 ]
 
