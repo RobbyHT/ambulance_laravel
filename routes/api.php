@@ -28,6 +28,8 @@ Route::apiResource('dispatchEMT','api\DispatchEmtController');
 Route::apiResource('consumablesRecord','api\ConsumablesRecordController');
 Route::apiResource('news','api\NewsController');
 Route::apiResource('equipment','api\EquipmentController');
+Route::apiResource('customer','api\CustomerController');
+Route::apiResource('preferential','api\PreferentialController');
 
 Route::get('checkTask','api\DispatchRecordController@checkTask');
 Route::get('userTake/{vm}','api\userController@userTake');
@@ -38,4 +40,6 @@ Route::get('getEvents','api\DispatchRecordController@getEvents');
 Route::post('dispatchCount','api\ChartController@dispatchCount');
 
 Route::post('exportUser','api\ExportController@exportUser');
-
+Route::post('exportCar','api\ExportController@exportCar');
+Route::post('exportEquipment','api\ExportController@exportEquipment');
+Route::post('exportDispatch','api\ExportController@exportDispatch');

@@ -25,6 +25,16 @@ const routes = [
     component: () => import('./Pages/equipment/equipment_index.vue')
   },
   {
+    path: '/preferential',
+    name: 'preferential',
+    component: () => import('./Pages/preferential/preferential_index.vue')
+  },
+  {
+    path: '/customer',
+    name: 'customer',
+    component: () => import('./Pages/customer/customer_index.vue')
+  },
+  {
     path: '/evaluation',
     name: 'evaluation',
     component: () => import('./Pages/evaluation/evaluation.vue')

@@ -20,7 +20,14 @@
   color: #000000;
   font-size: 1.3rem;
   font-weight: bolder;
-  padding: 3vmin 5vmin;
-  text-align: left;
+  padding: 3vmin 0;
+  text-align: center;
   max-height: 25vmin;
+}
+legend {
+  font-size: 1.1rem;
+}
+.eva-row {
+  display: -webkit-inline-box !important;
+  flex-wrap: wrap;
 }

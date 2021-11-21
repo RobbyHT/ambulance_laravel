@@ -34,5 +34,8 @@ class DispatchRecord extends Model
         'driver_id',
         'state',
         'user_id',
+        'distance',
+        'duration',
+        'totalPay',
     ];
 }
