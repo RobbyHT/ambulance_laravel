@@ -6,7 +6,7 @@
     <div class="tableDiv">
       <div class="dialog-bottom col-12">
         <div class="col-4 dialog-title">
-          人員管理
+          員工管理
         </div>
         <div class="col-8" style="margin-left: auto; order: 2; display: inline-flex; align-items: center;">
           <div class="col-6 input-wrapper">
@@ -48,7 +48,6 @@
             <td align="center">
               <div class="select">
                 <select :name="'userPermission'+index" :id="'userPermission'+index" class="form-control" :value="user.permission" @change="updPermission(user.id, user.permission, $event)">
-                  <option value="admin" :selected="user.permission == 'admin'">系統管理者</option>
                   <option value="unit" :selected="user.permission == 'unit'">單位管理者</option>
                   <option value="driver" :selected="user.permission == 'driver'">司機</option>
                   <option value="EMT" :selected="user.permission == 'EMT'">救護員</option>
@@ -121,7 +120,12 @@
         vm.$loader.show({
           container: this.$refs.root
         });
-        await axios.get('/api/user')
+        await axios.get('/api/user', { 
+          params: { 
+            c_id: vm.$cId,
+            user_id: vm.$userId
+          } 
+        })
         .then(function (resp) {
           vm.userData = resp.data;
           vm.$loader.hide();

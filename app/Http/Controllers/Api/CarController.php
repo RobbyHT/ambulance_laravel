@@ -14,9 +14,10 @@ class CarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $data = Car::join('users', 'cars.driver_id', 'users.id')
+            ->where('c_id', $request->c_id)
             ->select('cars.*', 'users.name')
             ->orderByDesc('cars.created_at')
             ->get();

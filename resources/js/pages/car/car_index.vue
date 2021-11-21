@@ -113,7 +113,11 @@
         vm.$loader.show({
           container: this.$refs.root
         });
-        await axios.get('/api/car')
+        await axios.get('/api/car', { 
+          params: { 
+            c_id: vm.$cId
+          } 
+        })
         .then(function (resp) {
           vm.carData = resp.data;
           vm.$loader.hide();

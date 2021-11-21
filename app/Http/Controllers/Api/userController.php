@@ -16,9 +16,11 @@ class userController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $data = User::join('companies', 'companies.id', 'users.c_id')
+            ->where('c_id', $request->c_id)
+            ->where('users.id', '!=', $request->user_id)
             ->select('users.*', 'companies.c_name')
             ->orderByDesc('created_at')
             ->get();
