@@ -68,7 +68,7 @@
           c_id: vm.$cId
         })
         .then(resp => {
-          vm.download(resp, '員工清單')
+          vm.download(resp.data, '員工清單')
         })
         .catch(err => console.log(err.response.data));
       },
@@ -78,7 +78,7 @@
           c_id: vm.$cId
         })
         .then(resp => {
-          vm.download(resp, '車輛清單')
+          vm.download(resp.data, '車輛清單')
         })
         .catch(err => console.log(err.response.data));
       },
@@ -88,7 +88,7 @@
           c_id: vm.$cId
         })
         .then(resp => {
-          vm.download(resp, '設備清單')
+          vm.download(resp.data, '設備清單')
         })
         .catch(err => console.log(err.response.data));
       },
@@ -98,7 +98,7 @@
           c_id: vm.$cId
         })
         .then(resp => {
-          vm.download(resp, '車趟報表')
+          vm.download(resp.data, '車趟報表')
         })
         .catch(err => console.log(err.response.data));
       },
