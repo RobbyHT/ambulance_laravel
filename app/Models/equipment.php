@@ -13,4 +13,6 @@ class equipment extends Model
         'name',
         'amount',
     ];
+
+    public $timestamps = false;
 }

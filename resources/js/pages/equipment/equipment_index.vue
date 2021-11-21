@@ -178,8 +178,11 @@
                 title: '刪除成功！',
                 icon: "success",
                 confirmButtonClass: 'btn btn-success',
-              })
-              vm.getAllEquipment();
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
             })
             .catch(function (error) {
               console.log(error);
@@ -194,6 +197,6 @@
     },
     mounted() {
       this.getAllEquipment();
-    }, 
+    }
   }
 </script>

@@ -18,7 +18,7 @@
                 <button type="button" class="btn btn-primary" style="width:150px;height:40px;" @click="exportCar">匯出車輛清單</button>
               </div>
               <div class="content">
-                <button type="button" class="btn btn-primary" style="width:150px;height:40px;" @click="exportCar">匯出設備清單</button>
+                <button type="button" class="btn btn-primary" style="width:150px;height:40px;" @click="exportEquipment">匯出設備清單</button>
               </div>
             </div>
             <div class="evaRight col-9 mt-3 text-center">

@@ -101,9 +101,12 @@
             title: '新增成功！',
             icon: "success",
             confirmButtonClass: 'btn btn-success',
-          })
-          $('#customerModal').modal('hide');
-          vm.$parent.getAllCustomer();
+          }).then(function (result) {
+            if (result.value) {
+              $('#customerModal').modal('hide');
+              location.reload();
+            }
+          });
         })
         .catch(function (error) {
           console.log(error);

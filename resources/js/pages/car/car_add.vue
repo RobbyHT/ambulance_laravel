@@ -91,9 +91,12 @@
             title: '新增成功！',
             icon: "success",
             confirmButtonClass: 'btn btn-success',
-          })
-          $('#carModal').modal('hide');
-          vm.$parent.getAllCar();
+          }).then(function (result) {
+            if (result.value) {
+              $('#carModal').modal('hide');
+              location.reload();
+            }
+          });
         })
         .catch(function (error) {
           console.log(error);

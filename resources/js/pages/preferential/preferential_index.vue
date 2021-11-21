@@ -19,7 +19,7 @@
             </a>
           </div>
           <div class="col-3 text-center">
-            <a href="javascript:void(0);" @click="delCar">
+            <a href="javascript:void(0);" @click="delPreferential">
               <img  src="/img/人員管理-刪除Icon.png" class="iconImg-4" alt="刪除" title="刪除">
               <span class="userDelBtn">刪除</span>
             </a>
@@ -180,8 +180,11 @@
                 title: '刪除成功！',
                 icon: "success",
                 confirmButtonClass: 'btn btn-success',
-              })
-              vm.getAllPreferential();
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
             })
             .catch(function (error) {
               console.log(error);

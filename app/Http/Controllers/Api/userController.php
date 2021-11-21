@@ -92,14 +92,13 @@ class userController extends Controller
             User::where('id', $id)->update([
                 'permission' => $request->data['permission'],
             ]);
-        }else{
-            User::where('id', $id)->update([
-                'name'=>$request->data['name'],
-                'gender'=>$request->data['gender'],
-                'birther'=>$request->data['birther'],
-                'telphone'=>$request->data['telphone']
-            ]);
         }
+        User::where('id', $id)->update([
+            'name'=>$request->data['name'],
+            'gender'=>$request->data['gender'],
+            'birther'=>$request->data['birther'],
+            'telphone'=>$request->data['telphone']
+        ]);
     }
 
     /**

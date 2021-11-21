@@ -75,9 +75,12 @@
             title: '新增成功！',
             icon: "success",
             confirmButtonClass: 'btn btn-success',
-          })
-          $('#preferentialModal').modal('hide');
-          vm.$parent.getAllPreferential();
+          }).then(function (result) {
+            if (result.value) {
+              $('#preferentialModal').modal('hide');
+              location.reload();
+            }
+          });
         })
         .catch(function (error) {
           console.log(error);

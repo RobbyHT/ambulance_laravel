@@ -61,7 +61,7 @@ class ExportController extends Controller
     {
         $data = DispatchRecord::join('users as user', function($q) use ($request){
             $q->on('dispatch_records.user_id', 'user.id')
-                ->where('user.c_id', '1');
+                ->where('user.c_id', $request->c_id);
         })
         ->join('users as driver', 'dispatch_records.driver_id', 'driver.id')
         ->select('d_date', 'd_time', 'start', 'end', 'driver.name', 'distance', 'duration', 'totalPay', 'o2', 'elevator', 'special', 'weight', 'phone', 'remark')
