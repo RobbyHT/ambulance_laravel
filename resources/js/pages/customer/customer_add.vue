@@ -77,6 +77,7 @@
           telphone: '',
           preferential_id: '',
           remark: '',
+          user_id: this.$userId
         }
       }
     },

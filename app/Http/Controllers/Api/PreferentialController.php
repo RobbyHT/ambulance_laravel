@@ -45,6 +45,7 @@ class PreferentialController extends Controller
                 'title'=>$request->data['title'],
                 'content'=>$request->data['content'],
                 'discount'=>$request->data['discount'],
+                'user_id'=>$request->data['user_id'],
             ]);
             DB::commit();
         } catch (Exception $e) {

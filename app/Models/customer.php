@@ -16,6 +16,7 @@ class customer extends Model
         'telphone',
         'preferential_id',
         'remark',
+        'user_id',
     ];
 
     protected $casts = [

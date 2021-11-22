@@ -14,6 +14,7 @@ class preferential extends Model
         'title',
         'content',
         'discount',
+        'user_id',
     ];
 
     protected $casts = [

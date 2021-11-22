@@ -93,6 +93,7 @@ class CustomerController extends Controller
             'telphone'=>$request->data['telphone'],
             'preferential_id'=>$request->data['preferential_id'],
             'remark'=>$request->data['remark'],
+            'user_id'=>$request->data['user_id'],
         ]);
     }
 

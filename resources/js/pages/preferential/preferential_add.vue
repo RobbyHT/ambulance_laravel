@@ -51,6 +51,7 @@
           title: '',
           content: '',
           discount: '',
+          user_id: this.$userId
         }
       }
     },
