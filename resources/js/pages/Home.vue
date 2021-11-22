@@ -107,6 +107,9 @@
             //center: 'title',
             start: 'title',
           },
+          buttonText: {
+            listMonth: 'Schedule',
+          },
           /*header: { // 頂部排版
             left: "prev,next today", // 左邊放置上一頁、下一頁和今天
             center: "title", // 中間放置標題

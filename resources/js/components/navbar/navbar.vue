@@ -17,10 +17,10 @@
             <ul class="nav navbar-nav float-right" style="color:#000; font-size: x-large !important; font-family: Microsoft JhengHei !important;font-weight:bold;">
               <li class="nav-item d-lg-block text-center" style="position: relative;">
                 <a href="javascript:void(0)" class="dropdown-toggle" @click="isShow=!isShow" style="padding: 1.5rem 1rem 1.15rem 1rem;font-weight:bold;">
-                  單位管理員<span class="caret"></span>
+                  仁光救護車有限公司<span class="caret"></span>
                 </a>
                 <br/>
-                <span class="mr-1">XXX</span>
+                <span class="mr-1">林昊霆</span>
                 <transition name="logoutMenuTra">
                   <ul class="logoutMenu" v-show="isShow">
                     <li>              
