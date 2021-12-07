@@ -33,7 +33,6 @@
       <div class="col-lg-8">
         <div class="calender text-center">
           <span class="title">派車行事曆</span>
-          <button class="newsAdd" data-toggle="modal" data-target="#dispatchModal" @click="dispatchId = '30'">111</button>
           <div class="content">
             <FullCalendar :options="calendarOptions" :events="events" />
           </div>
