@@ -9,7 +9,9 @@
   <div class="container register">
   <div class="row">
     <div class="col-md-3 register-left">
-      <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+      <!-- <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/> -->
+      <img src="{{asset('img/logoImg2.gif')}}" alt=""/>
+      
       <h2>註冊申請</h2>
       <p>歡迎使用醫指派網頁平台，註冊分為公司註冊與個人註冊，若 貴公司為初次使用，需要先以公司名義申請單位管理員帳號，認證通過後，使用者可依公司金鑰註冊。</p>
       <input type="button" onclick="location.href='/login'" value="登入"/><br/>
@@ -25,7 +27,7 @@
       </ul>
       {{--個人註冊--}}
       <div class="tab-content" id="myTabContent">
-        <h4 class="text-left pt-3 pl-5 font-large-1" style="font-family: Microsoft JhengHei !important;" >
+        <h4 class="text-left pt-3 pl-5 ml-5 font-large-1" style="font-family: Microsoft JhengHei !important;" >
           <span style="color:red;">
             {{ strlen($errors->regdata->first('email')) > 0 ? 'Email已註冊' : '' }}&nbsp;
             {{ strlen($errors->regdata->first('account')) > 0 ? '帳號已註冊' : '' }}&nbsp;
@@ -76,7 +78,7 @@
                   </div>
                 </div>
                 <div class="form-group mb-2">
-                  <label class="text-bold-600 font-medium-5" for="telphone"><span class="text-danger">(*)</span>手耭號碼</label>
+                  <label class="text-bold-600 font-medium-5" for="telphone"><span class="text-danger">(*)</span>手機號碼</label>
                   <div class="controls">
                     <input type="text" class="form-control" id="telphone" name="telphone" maxlength="15"
                       placeholder="請填入註冊人手機號碼" data-validation-containsnumber-regex="^\(?(\d{2})\)?[\s\-]?(\d{3,4})\-?(\d{4})$"
@@ -95,11 +97,11 @@
                   <label class="text-bold-600 font-medium-5" for="gender"><span class="text-danger">(*)</span>性別</label>
                   <div class="">
                     <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" class="radio" id="gender_m" name="gender" value="男">
+                      <input type="radio" class="radio" id="gender_m" name="gender" value="M">
                       <label class="label" for="gender_m">男</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" class="radio" id="gender_f" name="gender" value="女">
+                      <input type="radio" class="radio" id="gender_f" name="gender" value="F">
                       <label class="label" for="gender_f">女</label>
                     </div>
                   </div>
@@ -107,7 +109,7 @@
                 <div class="form-group mb-2">
                   <label class="text-bold-600 font-medium-5" for="company_key"><span class="text-danger">(*)</span>公司金鑰</label>
                   <div class="controls">
-                    <input type="text" class="form-control" id="company_key" name="company_key" maxlength="50"
+                    <input type="text" class="form-control" id="company_key" name="company_key"
                         placeholder="請填入公司金鑰" data-validation-required-message="公司金鑰為必填" required>
                   </div>
                 </div>
@@ -119,7 +121,7 @@
                   <label class="text-bold-600 font-medium-5" for="license_img"><span class="text-danger">(*)</span>證照上傳</label>
                   <div class="controls">
                     <input type="file" id="license_img" name="license_img" accept=".jpg, .jpeg, .png" onchange="previewFile()">
-                    <img src="" alt="" class="slider-image" width="100%" height="150px" onclick="imgBtn()">
+                    <img src="{{asset('img/upload2-06.png')}}" alt="" class="slider-image" width="100%" height="150px" onclick="imgBtn()">
                   </div>
                 </div>
               </div>
@@ -179,7 +181,7 @@
                   </div>
                 </div>
                 <div class="form-group mb-2">
-                  <label class="text-bold-600 font-medium-5" for="telphone"><span class="text-danger">(*)</span>手耭號碼</label>
+                  <label class="text-bold-600 font-medium-5" for="telphone"><span class="text-danger">(*)</span>手機號碼</label>
                   <div class="controls">
                     <input type="text" class="form-control" id="telphone" name="telphone" maxlength="15"
                       placeholder="請填入註冊人手機號碼" data-validation-containsnumber-regex="^\(?(\d{2})\)?[\s\-]?(\d{3,4})\-?(\d{4})$"

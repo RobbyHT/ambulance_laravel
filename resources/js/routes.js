@@ -44,6 +44,11 @@ const routes = [
     name: 'analysisAdmin',
     component: () => import('./Pages/analysis/analysis.vue')
   },
+  {
+    path: '/companyKey',
+    name: 'companyKey',
+    component: () => import('./Pages/companyKey/companyKey.vue')
+  },
 ]
 
 export default routes;

@@ -33,6 +33,7 @@
       <div class="col-lg-8">
         <div class="calender text-center">
           <span class="title">派車行事曆</span>
+          <button class="newsAdd" data-toggle="modal" data-target="#dispatchModal" @click="dispatchId = '30'">111</button>
           <div class="content">
             <FullCalendar :options="calendarOptions" :events="events" />
           </div>
@@ -64,6 +65,21 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="dispatchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title col-form-label" id="exampleModalCenterTitle">車趟資訊</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="dispatch-body">
+          <DispatchInfo :dispatchId="dispatchId" :key="dispatchId" />
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="modal fade" id="newsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -89,14 +105,17 @@
   import listPlugin from '@fullcalendar/list'
   import NewsAdd from './news/news_add.vue'
   import NewsUpd from './news/news_upd.vue'
+  import DispatchInfo from './dispatch/dispatch_show.vue'
   export default {
     components: {
       FullCalendar,
       NewsAdd,
-      NewsUpd
+      NewsUpd,
+      DispatchInfo
     },
     data() {
       return {
+        dispatchId: "",
         newsView: "",
         newsId: "",
         newsData: [],
@@ -110,24 +129,21 @@
           buttonText: {
             listMonth: 'Schedule',
           },
-          /*header: { // 頂部排版
-            left: "prev,next today", // 左邊放置上一頁、下一頁和今天
-            center: "title", // 中間放置標題
-            right: "month,agendaWeek,agendaDay,listMonth" // 右邊放置月、周、天
-          },*/
           plugins: [ dayGridPlugin, interactionPlugin, listPlugin ],
           initialView: 'listMonth',
           dateClick: this.handleDateClick,
           events: [],
-          eventClick: function(event) {
-            console.log(event.event.title);
-          }
+          eventClick: this.eventClick
         }
       }
     },
     methods: {
       handleDateClick: function(arg) {
         alert('date click! ' + arg.dateStr)
+      },
+      eventClick: function(event) {
+        this.dispatchId = event.event.id;
+        $('#dispatchModal').modal('show');
       },
       getEvents: function () {
         axios.get('/api/getEvents')
@@ -162,10 +178,6 @@
         });
       },
     },
-    /*created: function() {
-      this.getAllNews();
-      this.getEvents();
-    },*/
     mounted() {        
       this.getAllNews();
       this.getEvents();

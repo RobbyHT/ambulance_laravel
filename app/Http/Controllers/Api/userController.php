@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\company;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
 use PhpParser\Node\Stmt\TryCatch;
 
 class userController extends Controller
@@ -133,6 +135,31 @@ class userController extends Controller
         }else if($vm === "EMT"){
             $data = User::where('permission', 'EMT')->get();   
         }
+        return response()->json($data);
+    }
+
+    public function updateCompanyKey(Request $request)
+    {
+        do {
+            $token = Str::random(80);
+            $tokenCheck = company::where('c_key', $token)->first();
+            if(isset($tokenCheck)){
+                $sameToken = true;
+            }else{
+                $sameToken = false;
+            }
+        }while($sameToken);
+
+        company::where('id', $request->c_id)->update([
+            'c_key' => $token
+        ]);
+    }
+
+    public function getCompanyKey(Request $request)
+    {
+        $data = company::where('id', $request->c_id)
+            ->select('c_key')
+            ->first();
         return response()->json($data);
     }
 }

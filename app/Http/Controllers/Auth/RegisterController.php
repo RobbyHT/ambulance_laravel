@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use App\Mail\RegMail;
 use Exception;
 
@@ -109,17 +110,23 @@ class RegisterController extends Controller
 
         DB::beginTransaction();
         try {
-            $data['license_path'] = null;
-            if($request->license_img != null && $request->license_img != "undefined"){
-                $data['license_path'] = Storage::disk('public')->put('license', $request->image);
-            }
-
             if($request->permission == 'unit'){
+                do {
+                    $token = Str::random(80);
+                    $tokenCheck = company::where('c_key', $token)->first();
+                    if(isset($tokenCheck)){
+                        $sameToken = true;
+                    }else{
+                        $sameToken = false;
+                    }
+                }while($sameToken);
+
                 $data['c_id'] = company::create([
                     'c_name' => $data['c_name'],
                     'c_tel' => $data['c_tel'],
                     'c_addr' => $data['c_addr'],
                     'tax_id' => $data['tax_id'],
+                    'c_key' => $token,
                 ])->id;
             }else{
                 $c_key = company::whereNotNull('c_key')->where('c_key', $request->company_key)->first();
@@ -128,10 +135,16 @@ class RegisterController extends Controller
                                 ->withErrors(["key"=>"key not found."], 'regdata')
                                 ->withInput($request->all());
                 }
+                $data['c_id'] = $c_key->id;
             }
 
             $data['perid'] = Crypt::encryptString($data['perid']);
             $data['password'] =  $this->generateRandomString(8);
+
+            $data['license_path'] = null;
+            if($request->license_img != null && $request->license_img != "undefined"){
+                $data['license_path'] = Storage::disk('public')->put('license_img', $request->license_img);
+            }
 
             event(new Registered($user = $this->create($data)));
             DB::commit();

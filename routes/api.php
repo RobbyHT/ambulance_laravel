@@ -43,3 +43,6 @@ Route::post('exportUser','api\ExportController@exportUser');
 Route::post('exportCar','api\ExportController@exportCar');
 Route::post('exportEquipment','api\ExportController@exportEquipment');
 Route::post('exportDispatch','api\ExportController@exportDispatch');
+
+Route::post('getCompanyKey','api\userController@getCompanyKey');
+Route::post('updateCompanyKey','api\userController@updateCompanyKey');

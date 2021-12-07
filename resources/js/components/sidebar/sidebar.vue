@@ -62,6 +62,7 @@
     <SidebarLink to="/customer" icon="fas fa-id-card">客戶管理</SidebarLink>
     <SidebarLink to="/evaluation" icon="fas fa-file-medical">評鑑管理</SidebarLink>
     <SidebarLink to="/analysisAdmin" icon="fas fa-chart-line">統計分析</SidebarLink>
+    <SidebarLink to="/companyKey" icon="fas fa-key">金鑰管理</SidebarLink>
 
     <span
       class="collapse-icon"

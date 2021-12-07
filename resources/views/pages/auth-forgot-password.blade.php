@@ -71,7 +71,7 @@
           </div>
           <!-- right section image -->
           <div class="col-md-6 d-md-block d-none text-center align-self-center">
-            <img class="img-fluid" src="{{asset('images/pages/forgot-password.png')}}" alt="branding logo" width="300">
+            <img class="img-fluid" src="{{asset('img/forgot-password.png')}}" alt="branding logo" width="300">
           </div>
         </div>
       </div>
