@@ -90,9 +90,9 @@ class DispatchRecordController extends Controller
      * @param  \App\Models\DispatchRecord  $dispatchRecord
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DispatchRecord $dispatchRecord)
+    public function destroy($id)
     {
-        //
+        DispatchRecord::where('id', $id)->delete();
     }
 
     public function checkTask(DispatchRecord $dispatchRecord)
