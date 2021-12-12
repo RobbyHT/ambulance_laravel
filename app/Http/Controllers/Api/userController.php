@@ -20,12 +20,48 @@ class userController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::join('companies', 'companies.id', 'users.c_id')
+        $res = User::join('companies', 'companies.id', 'users.c_id')
             ->where('c_id', $request->c_id)
             ->where('users.id', '!=', $request->user_id)
             ->select('users.*', 'companies.c_name')
             ->orderByDesc('created_at')
             ->get();
+
+        $data = [];
+        foreach($res as $re){
+            $permission = '';
+            switch($re['permission']){
+                case 'admin':
+                    $permission = '系統管理者';
+                    break;
+                case 'driver':
+                    $permission = '司機';
+                    break;
+                case 'EMT':
+                    $permission = '醫療人員';
+                    break;
+                case 'unit':
+                    $permission = '單位管理者';
+                    break;
+                case 'common':
+                    $permission = '一般使用者';
+                    break;
+            }
+            $data[] = [
+                'id'=>$re['id'],
+                'account'=>$re['account'],
+                'name'=>$re['name'],
+                'gender'=>$re['gender']=='M'?'男':'女',
+                'birther'=>$re['birther'],
+                'perid'=>Crypt::decryptString($re['perid']),
+                'permission'=>$permission,
+                'email'=>$re['email'],
+                'telphone'=>$re['telphone'],
+                'created_at'=>$re['created_at'],
+                'updated_at'=>$re['updated_at'],
+                'deleted_at'=>$re['deleted_at']
+            ];
+        }
         return response()->json($data);
     }
 
