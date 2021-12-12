@@ -47,13 +47,20 @@ class userController extends Controller
                     $permission = '一般使用者';
                     break;
             }
+
+            try {
+                $perid = Crypt::decryptString($re['perid']);
+            } catch (\Throwable $th) {
+                $perid = $re['perid'];
+            }
+            
             $data[] = [
                 'id'=>$re['id'],
                 'account'=>$re['account'],
                 'name'=>$re['name'],
                 'gender'=>$re['gender']=='M'?'男':'女',
                 'birther'=>$re['birther'],
-                'perid'=>Crypt::decryptString($re['perid']),
+                'perid'=>$perid,
                 'permission'=>$permission,
                 'email'=>$re['email'],
                 'telphone'=>$re['telphone'],
