@@ -38,6 +38,7 @@ Route::get('emtTask/{userid}','api\DispatchRecordController@emtTask');
 Route::get('getEvents','api\DispatchRecordController@getEvents');
 
 Route::post('dispatchCount','api\ChartController@dispatchCount');
+Route::post('simgleDispatchCount','api\ChartController@simgleDispatchCount');
 
 Route::post('exportUser','api\ExportController@exportUser');
 Route::post('exportCar','api\ExportController@exportCar');
