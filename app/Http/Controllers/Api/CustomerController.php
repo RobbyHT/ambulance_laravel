@@ -15,9 +15,16 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = customer::orderByDesc('created_at')->get();
+        //$data = customer::orderByDesc('created_at')->get();
+
+        $data = customer::join('preferentials', 'preferentials.id', 'customers.preferential_id')
+            ->join('users', 'users.id', 'customers.user_id')
+            ->where('users.c_id', $request->c_id)
+            ->select('customers.*', 'preferentials.title as preferential')
+            ->orderByDesc('created_at')
+            ->get();
         return response()->json($data);
     }
 
