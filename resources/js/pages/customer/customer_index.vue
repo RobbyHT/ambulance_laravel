@@ -111,7 +111,11 @@
         vm.$loader.show({
           container: this.$refs.root
         });
-        await axios.get('/api/customer')
+        await axios.get('/api/customer', {
+                  params: {
+                    c_id: vm.$cId
+                  }
+                })
         .then(function (resp) {
           vm.customerData = resp.data;
           vm.$loader.hide();
