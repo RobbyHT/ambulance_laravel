@@ -61,6 +61,7 @@ class userController extends Controller
                 'gender'=>$re['gender']=='M'?'男':'女',
                 'birther'=>$re['birther'],
                 'perid'=>$perid,
+                'permission_code'=>$re['permission'],
                 'permission'=>$permission,
                 'email'=>$re['email'],
                 'telphone'=>$re['telphone'],
