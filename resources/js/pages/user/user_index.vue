@@ -47,10 +47,10 @@
             <td align="center">{{user.company}}</td>
             <td align="center">
               <div class="select">
-                <select :name="'userPermission'+index" :id="'userPermission'+index" class="form-control" :value="user.permission" @change="updPermission(user.id, user.permission, $event)">
-                  <option value="unit" :selected="user.permission == '單位管理者'">單位管理者</option>
-                  <option value="driver" :selected="user.permission == '司機'">司機</option>
-                  <option value="EMT" :selected="user.permission == '醫療人員'">醫療人員</option>
+                <select :name="'userPermission'+index" :id="'userPermission'+index" class="form-control" :value="user.permission_code" @change="updPermission(user.id, user.permission_code, $event)">
+                  <option value="unit" :selected="user.permission_code == 'unit'">單位管理者</option>
+                  <option value="driver" :selected="user.permission_code == 'driver'">司機</option>
+                  <option value="EMT" :selected="user.permission_code == 'EMT'">醫療人員</option>
                 </select>
               </div>
             </td>
