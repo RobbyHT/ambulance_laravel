@@ -31,6 +31,4 @@ class User extends Authenticatable
         'telphone',
         'license_path',
     ];
-
-    protected $casts = ['created_at' => 'datetime:Y-m-d',];
 }

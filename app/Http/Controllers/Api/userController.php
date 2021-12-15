@@ -66,9 +66,9 @@ class userController extends Controller
                 'email'=>$re['email'],
                 'telphone'=>$re['telphone'],
                 'company'=>$re['c_name'],
-                'created_at'=>$re['created_at'],
-                'updated_at'=>$re['updated_at'],
-                'deleted_at'=>$re['deleted_at']
+                'created_at'=>date_format($re['created_at'], 'Y-m-d'),
+                'updated_at'=>date_format($re['updated_at'], 'Y-m-d'),
+                'deleted_at'=>$re['deleted_at'] != null ? date_format($re['deleted_at'], 'Y-m-d'):""
             ];
         }
         return response()->json($data);
