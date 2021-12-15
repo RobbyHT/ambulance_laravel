@@ -44,13 +44,13 @@
             <td align="center">{{index+1}}</td>
             <td align="center">{{user.name}}</td>
             <td align="center">{{user.email}}</td>
-            <td align="center">{{user.c_name}}</td>
+            <td align="center">{{user.company}}</td>
             <td align="center">
               <div class="select">
                 <select :name="'userPermission'+index" :id="'userPermission'+index" class="form-control" :value="user.permission" @change="updPermission(user.id, user.permission, $event)">
-                  <option value="unit" :selected="user.permission == 'unit'">單位管理者</option>
-                  <option value="driver" :selected="user.permission == 'driver'">司機</option>
-                  <option value="EMT" :selected="user.permission == 'EMT'">救護員</option>
+                  <option value="unit" :selected="user.permission == '單位管理者'">單位管理者</option>
+                  <option value="driver" :selected="user.permission == '司機'">司機</option>
+                  <option value="EMT" :selected="user.permission == '醫療人員'">醫療人員</option>
                 </select>
               </div>
             </td>

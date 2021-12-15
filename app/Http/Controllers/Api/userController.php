@@ -64,6 +64,7 @@ class userController extends Controller
                 'permission'=>$permission,
                 'email'=>$re['email'],
                 'telphone'=>$re['telphone'],
+                'company'=>$re['c_name'],
                 'created_at'=>$re['created_at'],
                 'updated_at'=>$re['updated_at'],
                 'deleted_at'=>$re['deleted_at']
