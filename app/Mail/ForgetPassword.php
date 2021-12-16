@@ -31,7 +31,7 @@ class ForgetPassword extends Mailable
      */
     public function build()
     {
-        return $this->subject("化學品虛擬實境教育訓練系統-忘記密碼訊息")
+        return $this->subject("醫指派-忘記密碼訊息")
                 ->view('emails.forgetpw')
                 ->with([
                     'data' => $this->params,

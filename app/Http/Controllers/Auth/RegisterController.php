@@ -187,7 +187,7 @@ class RegisterController extends Controller
             // 提供給模板的參數
             $data['subject'] = '醫指派註冊訊息';
             $data['msg'] = '您好，登入用的帳號/密碼如下，請至首頁登入後修改密碼!!';
-            $data['url'] = 'http://127.0.0.1:3000';
+            $data['url'] = 'http://140.131.115.55/';
 
             // 若要直接檢視模板
             // echo (new Warning($data))->render();die;
