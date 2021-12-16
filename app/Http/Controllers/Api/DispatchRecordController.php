@@ -118,9 +118,10 @@ class DispatchRecordController extends Controller
         return response()->json($data);
     }
 
-    public function getEvents()
+    public function getEvents($userid)
     {
-        $data = DB::select("select id, (dispatch_records.start || '到' || dispatch_records.end) as title, d_date as start from dispatch_records");
+        $data = DB::select("select id, (dispatch_records.start || '到' || dispatch_records.end) as title, d_date as start from dispatch_records 
+        where user_id = ?", [$userid]);
         return response()->json($data);
     }
 }
