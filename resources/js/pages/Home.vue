@@ -145,7 +145,7 @@
         $('#dispatchModal').modal('show');
       },
       getEvents: function () {
-        axios.get('/api/getEvents')
+        axios.get(`/api/getEvents/${this.$userId}`)
           .then(resp => (this.calendarOptions.events = resp.data))
           .catch(err => console.log(err.response.data));
       },
