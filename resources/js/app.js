@@ -47,6 +47,7 @@ const router = createRouter({
 })
 
 const app = createApp(App).use(router)
+import loader from 'vue3-loading-overlay';
 app.config.globalProperties.$loader = useLoading({
     canCancel: false,
     color: '#000000',
@@ -61,6 +62,8 @@ app.config.globalProperties.$swal = swal;
 app.config.globalProperties.$moment = moment;
 app.config.globalProperties.$userId = document.querySelector("meta[name='user_id']").getAttribute('content');
 app.config.globalProperties.$cId = document.querySelector("meta[name='c_id']").getAttribute('content');
+app.config.globalProperties.$username = document.querySelector("meta[name='username']").getAttribute('content');
+app.config.globalProperties.$company = document.querySelector("meta[name='company']").getAttribute('content');
 app.mount('#app');
 
 /*const vm = Vue.createApp({

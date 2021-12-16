@@ -7,6 +7,8 @@
     @if (Auth::check()) 
       <meta name="user_id" content="{{ Auth::user()->id }}" />
       <meta name="c_id" content="{{ Auth::user()->c_id }}" />
+      <meta name="username" content="{{ Auth::user()->name }}" />
+      <meta name="company" content="{{ Auth::user()->company->c_name }}" />
     @endif 
 
     <title>醫指派</title>

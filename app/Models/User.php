@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\company;
 
 class User extends Authenticatable
 {
@@ -31,4 +32,9 @@ class User extends Authenticatable
         'telphone',
         'license_path',
     ];
+
+    public function company()
+    {
+        return $this->hasOne(company::class, 'id', 'c_id');
+    }
 }
