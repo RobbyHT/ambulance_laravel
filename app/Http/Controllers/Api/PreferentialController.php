@@ -15,9 +15,11 @@ class PreferentialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = preferential::orderByDesc('created_at')->get();
+        $data = preferential::where('user_id', $request->user_id)
+            ->orderByDesc('created_at')
+            ->get();
         return response()->json($data);
     }
 

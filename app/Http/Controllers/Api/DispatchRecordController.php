@@ -56,7 +56,11 @@ class DispatchRecordController extends Controller
      */
     public function show(DispatchRecord $dispatchRecord, int $id)
     {
-        $data = DispatchRecord::find($id);
+        //$data = DispatchRecord::find($id);
+        $data = DispatchRecord::join('users', 'users.id', 'dispatch_records.driver_id')
+            ->select('dispatch_records.*', 'users.name as driver')
+            ->where('dispatch_records.id', $id)
+            ->first();
         return response()->json($data);
     }
 

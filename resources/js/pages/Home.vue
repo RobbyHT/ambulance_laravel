@@ -166,14 +166,26 @@
       },
       delNews: function(index) {
         var vm = this;
-        axios.post(`/api/news/${vm.newsData[index].id}`, {
-          _method: 'DELETE'
-        })
-        .then(function (resp) {
-          vm.newsData.splice(index, 1);
-        })
-        .catch(function (error) {
-          console.log(error);
+        vm.$swal.fire({
+          title: '確認刪除？',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: '確認',
+          cancelButtonText: '取消',
+          confirmButtonClass: 'btn btn-warning',
+          cancelButtonClass: 'btn btn-danger ml-1',
+        }).then(function (result) {
+          if (result.value) {
+            axios.post(`/api/news/${vm.newsData[index].id}`, {
+              _method: 'DELETE'
+            })
+            .then(function (resp) {
+              vm.newsData.splice(index, 1);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          }
         });
       },
     },

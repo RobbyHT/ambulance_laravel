@@ -109,7 +109,11 @@
         vm.$loader.show({
           container: this.$refs.root
         });
-        await axios.get('/api/preferential')
+        await axios.get('/api/preferential', {
+                  params: {
+                    user_id: vm.$userId
+                  }
+                })
         .then(function (resp) {
           vm.preferentialData = resp.data;
           vm.$loader.hide();
