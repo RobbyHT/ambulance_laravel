@@ -19,9 +19,9 @@
 </style>
 
 <template>
-  <Navbar />
-  <Sidebar />
-  <div :style="{ 'margin-left': sidebarWidth }">
+  <Navbar v-if="hasLayout" />
+  <Sidebar v-if="hasLayout" />
+  <div :style="hasLayout ? { 'margin-left': sidebarWidth } : {}">
     <router-view />
   </div>
 
@@ -38,6 +38,11 @@
     components: {
       Navbar,
       Sidebar
+    },
+    computed: {
+      hasLayout() {
+        return this.$route.meta.layout
+      },
     },
     setup() {
       return { sidebarWidth }
