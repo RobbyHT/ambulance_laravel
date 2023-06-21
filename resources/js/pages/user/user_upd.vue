@@ -136,8 +136,6 @@
           showCancelButton: true,
             confirmButtonText: '確認',
             cancelButtonText: '取消',
-            confirmButtonClass: 'btn btn-warning',
-            cancelButtonClass: 'btn btn-danger ml-1',
         }).then(function (result) {
           if (result.value) {
             axios.post(`/api/user/${vm.userId}`, {

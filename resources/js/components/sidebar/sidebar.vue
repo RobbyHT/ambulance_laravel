@@ -73,6 +73,7 @@
     </span>
   </div>
 </template>
+
 <script>
   import SidebarLink from './sidebarLink'
   import { collapsed, toggleSidebar, hoverSidebar, hoverOutSidebar, sidebarWidth } from './state'

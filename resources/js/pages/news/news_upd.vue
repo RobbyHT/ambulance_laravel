@@ -8,7 +8,7 @@
           <div class="tab-content">
             <div class="tab template-content">
               <div class="form-group row mb-1">
-                <label for="title" class="col-sm-3 col-form-label text-right">
+                <label class="col-sm-3 col-form-label text-right">
                   標題：
                   <span class="text-danger">*</span>
                 </label>
@@ -17,7 +17,7 @@
                 </div>
               </div>
               <div class="form-group row mb-1">
-                <label for="content" class="col-sm-3 col-form-label text-right">
+                <label class="col-sm-3 col-form-label text-right">
                   內容：
                   <span class="text-danger">*</span>
                 </label>

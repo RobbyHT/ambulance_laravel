@@ -37,7 +37,10 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ mix('js/manifest.js') }}"></script>
+    <script src="{{ mix('js/vendor.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
     <script src="{{ asset('js/menu.js') }}"></script>
     <script src="https://kit.fontawesome.com/3cec4745c4.js" crossorigin="anonymous"></script>
     <script>

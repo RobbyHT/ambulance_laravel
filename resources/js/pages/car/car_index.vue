@@ -110,7 +110,7 @@
     methods: {
       getAllCar: async function() {
         var vm = this;
-        vm.$loader.show({
+        let loader = this.$loader.show({
           container: this.$refs.root
         });
         await axios.get('/api/car', { 
@@ -120,7 +120,7 @@
         })
         .then(function (resp) {
           vm.carData = resp.data;
-          vm.$loader.hide();
+          loader.hide();
         })
         .catch(function (error) {
           console.log(error);
@@ -167,8 +167,6 @@
           showCancelButton: true,
           confirmButtonText: '確認',
           cancelButtonText: '取消',
-          confirmButtonClass: 'btn btn-warning',
-          cancelButtonClass: 'btn btn-danger ml-1',
         }).then(function (result) {
           if (result.value) {
             var checked = []
